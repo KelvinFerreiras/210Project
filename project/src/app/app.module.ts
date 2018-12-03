@@ -12,6 +12,10 @@ import { MainComponent } from './main/main.component';
 import { SidebarComponent } from './main/sidebar/sidebar.component';
 import { FeedComponent } from './main/feed/feed.component';
 import { PostsComponent } from './main/feed/posts/posts.component';
+import { ChatComponent } from './main/chat/chat.component';
+import { ProfileComponent } from './main/profile/profile.component';
+import { GamesComponent } from './main/games/games.component';
+import { SettingsComponent } from './main/settings/settings.component';
 
 
 
@@ -23,7 +27,11 @@ import { PostsComponent } from './main/feed/posts/posts.component';
     MainComponent,
     SidebarComponent,
     FeedComponent,
-    PostsComponent
+    PostsComponent,
+    ChatComponent,
+    ProfileComponent,
+    GamesComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
