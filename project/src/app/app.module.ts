@@ -10,6 +10,8 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { appRoutes } from "./routes";
 import { MainComponent } from './main/main.component';
 import { SidebarComponent } from './main/sidebar/sidebar.component';
+import { FeedComponent } from './main/feed/feed.component';
+import { PostsComponent } from './main/feed/posts/posts.component';
 
 
 
@@ -19,7 +21,9 @@ import { SidebarComponent } from './main/sidebar/sidebar.component';
     UserComponent,
     SignUpComponent,
     MainComponent,
-    SidebarComponent
+    SidebarComponent,
+    FeedComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
