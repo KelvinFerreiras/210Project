@@ -16,6 +16,7 @@ import { ChatComponent } from './main/chat/chat.component';
 import { ProfileComponent } from './main/profile/profile.component';
 import { GamesComponent } from './main/games/games.component';
 import { SettingsComponent } from './main/settings/settings.component';
+import { MakepostComponent } from './main/feed/posts/makepost/makepost.component';
 
 
 
@@ -31,14 +32,26 @@ import { SettingsComponent } from './main/settings/settings.component';
     ChatComponent,
     ProfileComponent,
     GamesComponent,
-    SettingsComponent
-  ],
+    SettingsComponent,
+    MakepostComponent
+    ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [  AppComponent,
+    UserComponent,
+    SignUpComponent,
+    MainComponent,
+    SidebarComponent,
+    FeedComponent,
+    PostsComponent,
+    ChatComponent,
+    ProfileComponent,
+    GamesComponent,
+    SettingsComponent,
+    MakepostComponent]
 })
 export class AppModule { }

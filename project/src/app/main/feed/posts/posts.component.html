@@ -1,6 +1,7 @@
 <div class="container">
   <h1>Posts</h1>
   <div class="wrapper">
+    <app-makepost></app-makepost>
     <div class="post" *ngFor="let post of posts$">
         <div class="header">
           <a routerLink="/user/{{post.user.username}}">{{post.user.firstName}} {{post.user.lastName}} - ({{post.user.username}})</a>
