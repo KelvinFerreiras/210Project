@@ -2,9 +2,7 @@
 
 /* BASIC */
 
-html {
-  background-color: #56baed;
-}
+
 
 body {
   font-family: "Poppins", sans-serif;
@@ -293,4 +291,8 @@ label.validation-message{
   background-color:#249424; /* Green */
   color: white;
   margin-bottom: 15px;
+}
+
+body{
+  margin: auto;
 }
