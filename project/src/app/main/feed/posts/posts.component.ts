@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from './post';
 
 @Component({
   selector: 'app-posts',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsComponent implements OnInit {
 
-  posts$: Object;
+  posts$:Object
+  // posts$=[
+  //   //new Post({"kelkft","Kelvin", "Ferreiras"}, {"Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World"},  {"2018-06-28T00:00:00.000Z"}),
+  //   new Post("kelkft","Kelvin", "Ferreiras", "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World",  "2018-06-28T00:00:00.000Z"),
+  //   new Post("kelkft","Kelvin", "Ferreiras", "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World",  "2018-06-28T00:00:00.000Z"),
+  //   new Post("kelkft","Kelvin", "Ferreiras", "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World",  "2018-06-28T00:00:00.000Z"),
+  //   new Post("kelkft","Kelvin", "Ferreiras", "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World",  "2018-06-28T00:00:00.000Z"),
+  //   new Post("kelkft","Kelvin", "Ferreiras", "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World",  "2018-06-28T00:00:00.000Z")
 
-  
+  // ]
+
   constructor() { }
 
   ngOnInit() {
@@ -23,6 +32,9 @@ export class PostsComponent implements OnInit {
       {"user": {"username": "kfkkfkf","firstName": "Jose","lastName": "Perez"},"content": {"text": "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World"},"details": {"date": "2018-05-21T00:00:00.000Z"}},
       {"user": {"username": "uuyutur","firstName": "Maria","lastName": "Jones"},"content": {"text": "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World"},"details": {"date": "2018-09-01T00:00:00.000Z"}}
     ]
+
+
+   // console.log(this.posts$[0].user.username)
 
   }
 
