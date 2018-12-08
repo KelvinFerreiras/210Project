@@ -1,0 +1,27 @@
+import { Injectable } from '@angular/core';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { environment } from '../../environments/environment';
+import { Post } from './post.model';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+
+
+export class PostsService {
+
+  selectedPost: Post = {
+    username: 'hola',
+    fullName: 'hola',
+    text: ''
+  };
+
+  constructor(private http: HttpClient) { }
+
+  addPost(post: Post){
+    return this.http.post(environment.apiBaseUrl+'/post',post);
+  }
+}

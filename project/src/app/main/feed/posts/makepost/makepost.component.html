@@ -1,6 +1,6 @@
-<div><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >Make a Post</button>
+<div><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#post-modal" >Make a Post</button>
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -10,31 +10,35 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
-
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Text:</label>
-              <textarea class="form-control" id="message-text">What's in your mind?</textarea>
+          <form #makePostForm="ngForm" (ngSubmit)="makePostForm.valid && onSubmit(makePostForm)">
+ 
+            <textarea class="form-control" id="message-text" type="text" #text="ngModel" [(ngModel)]="postsService.selectedPost.text" name="text"></textarea>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!makePostForm.valid" >Publish</button>
             </div>
+
           </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Publish</button>
-        </div>
+      
       </div>
     </div>
   </div>
 </div>
 
-<script>
-  $('#exampleModal').on('show.bs.modal', function (event) {
-  //var button = $(event.relatedTarget) // Button that triggered the modal
- // var recipient = button.data('whatever') // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
- // var modal = $(this)
-  //modal.find('.modal-title').text('New message to ' + recipient)
- // modal.find('.modal-body input').val(recipient)
-})
-</script>
+
+<!-- <form #makePostForm="ngForm" (ngSubmit)="makePostForm.valid && onSubmit(makePostForm)">
+ 
+  <input type="text" #text="ngModel" [(ngModel)]="postsService.selectedPost.text" name="text">
+
+  <input type="submit" value="Publish">
+</form> -->
+
+<!-- <script>
+  $('#post-modal').click(function() {
+
+    $('#post-modal').modal('hide');
+    return false;
+  });
+</script> -->

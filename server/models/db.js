@@ -6,3 +6,4 @@ mongoose.connect('mongodb://localhost:27017/MEANStackDB', {useNewUrlParser: true
 });
 
 require('./user.model');
+require('./post.model');
