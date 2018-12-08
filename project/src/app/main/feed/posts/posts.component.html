@@ -4,11 +4,11 @@
     <app-makepost></app-makepost>
     <div class="post" *ngFor="let post of posts$">
         <div class="header">
-          <a routerLink="/user/{{post.user.username}}">{{post.user.firstName}} {{post.user.lastName}} - ({{post.user.username}})</a>
+          <a routerLink="/user/{{post.username}}">{{post.fullName}}  - ({{post.username}})</a>
         </div>
         <div>
-          <div class="textContent">{{post.content.text}}</div>
-          <div class="date">{{post.details.date | date:'short' }}</div>
+          <div class="textContent">{{post.text}}</div>
+          <!-- <div class="date">{{post.details.date | date:'short' }}</div> -->
         </div>
     </div>
   </div>

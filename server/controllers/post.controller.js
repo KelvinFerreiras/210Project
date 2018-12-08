@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const Post = mongoose.model('Post');
+const Post = mongoose.model('posts');
 
-module.exports.postTest = (req,res,next) => {
+module.exports.savePost = (req,res,next) => {
     var post = new Post();
     post.username = req.body.username;
     post.fullName = req.body.fullName;
@@ -25,3 +25,17 @@ module.exports.postTest = (req,res,next) => {
         }
     });
 }
+
+module.exports.getPost = (req,res) => {
+
+    Post.find({}, function(err, posts) {
+        if(!err) {
+            res.send(posts)
+        }
+        else{
+            return next(err);
+        }
+    
+      });
+}
+

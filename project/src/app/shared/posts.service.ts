@@ -24,4 +24,7 @@ export class PostsService {
   addPost(post: Post){
     return this.http.post(environment.apiBaseUrl+'/post',post);
   }
+  getAllPosts() {
+    return this.http.get(environment.apiBaseUrl+'/posts');
+  }
 }

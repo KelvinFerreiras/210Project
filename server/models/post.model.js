@@ -9,4 +9,4 @@ var postSchema = new mongoose.Schema({
     text: String,
     //date: Date
 });
-mongoose.model('Post', postSchema);
+mongoose.model('posts', postSchema);
