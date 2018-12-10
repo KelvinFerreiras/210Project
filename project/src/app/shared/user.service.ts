@@ -16,7 +16,17 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  postUser(user: User){
-    return this.http.post(environment.apiBaseUrl+'/register',user);
+  postUser(user: User) {
+    return this.http.post(environment.apiBaseUrl + '/register', user);
   }
+
+  login(authCredentials) {
+    return this.http.post(environment.apiBaseUrl + '/authenticate', authCredentials);
+  }
+
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  
 }

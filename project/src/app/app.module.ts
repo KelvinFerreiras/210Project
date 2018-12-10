@@ -18,6 +18,8 @@ import { ProfileComponent } from './main/profile/profile.component';
 import { GamesComponent } from './main/games/games.component';
 import { SettingsComponent } from './main/settings/settings.component';
 import { MakepostComponent } from './main/feed/posts/makepost/makepost.component';
+import { SignInComponent } from './user/sign-in/sign-in.component';
+import { UserService } from './shared/user.service';
 
 
 
@@ -34,7 +36,8 @@ import { MakepostComponent } from './main/feed/posts/makepost/makepost.component
     ProfileComponent,
     GamesComponent,
     SettingsComponent,
-    MakepostComponent
+    MakepostComponent,
+    SignInComponent
     ],
   imports: [
     BrowserModule,
@@ -42,7 +45,7 @@ import { MakepostComponent } from './main/feed/posts/makepost/makepost.component
     RouterModule.forRoot(appRoutes),
     HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [  AppComponent/*,
     UserComponent,
     SignUpComponent,a
