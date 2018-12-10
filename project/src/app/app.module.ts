@@ -43,7 +43,7 @@ import { MakepostComponent } from './main/feed/posts/makepost/makepost.component
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [  AppComponent,
+  bootstrap: [  AppComponent/*,
     UserComponent,
     SignUpComponent,
     MainComponent,
@@ -54,6 +54,6 @@ import { MakepostComponent } from './main/feed/posts/makepost/makepost.component
     ProfileComponent,
     GamesComponent,
     SettingsComponent,
-    MakepostComponent]
+  MakepostComponent*/]
 })
 export class AppModule { }
