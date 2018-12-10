@@ -23,7 +23,6 @@ export class PostsComponent implements OnInit {
   constructor(private postsService: PostsService) { }
 
   ngOnInit() {
-    console.log("hola");
 
     //this.posts$= "{\"user\": {\"username\": \"kelkft\",\"firstName\": \"Kelvin\",\"lastName\": \"Ferreiras\"},\"content\": {\"text\": \"Hello World\"},\"details\": {\"date\": \"2018-06-25T00:00:00.000Z\"}}"
     // this.posts$= [

@@ -14,9 +14,10 @@ import { Post } from './post.model';
 export class PostsService {
 
   selectedPost: Post = {
-    username: 'hola',
-    fullName: 'hola',
-    text: ''
+    username: '',
+    fullName: '',
+    text: '',
+    date: 0
   };
 
   constructor(private http: HttpClient) { }
