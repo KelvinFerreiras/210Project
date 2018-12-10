@@ -45,7 +45,7 @@ import { MakepostComponent } from './main/feed/posts/makepost/makepost.component
   providers: [],
   bootstrap: [  AppComponent/*,
     UserComponent,
-    SignUpComponent,
+    SignUpComponent,a
     MainComponent,
     SidebarComponent,
     FeedComponent,
