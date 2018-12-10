@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
 var postSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        unique: true
-    },
+    username: String,
     fullName: String,
     text: String,
     date: Number
