@@ -7,6 +7,6 @@ var postSchema = new mongoose.Schema({
     },
     fullName: String,
     text: String,
-    //date: Date
+    date: Number
 });
 mongoose.model('posts', postSchema);

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../../../../shared/posts.service';
 import { Post } from '../../../../shared/post.model';
+import {Router} from '@angular/router';
+
 
 import { NgForm } from '@angular/forms';
 
@@ -11,28 +13,35 @@ import { NgForm } from '@angular/forms';
 })
 export class MakepostComponent implements OnInit {
 
-  hola:Post;
+  currentPost:Post;
 
   
 
-  constructor(private postsService: PostsService ) { }
+  constructor(private postsService: PostsService , private router: Router) { }
 
   ngOnInit() {
 
   }
 
   onSubmit(form: NgForm) {
-    this.hola= {
+    this.currentPost= {
         username: 'Username-Test-'+Date.now(),
          fullName: 'FullName-Test',
-         text: form.value.text
+         text: form.value.text,
+         date: Date.now()
+         
     };
     
-    this.postsService.addPost(this.hola).subscribe(
+    this.postsService.addPost(this.currentPost).subscribe(
+      
       res => {
      //   this.showSucessMessage = true;
       //  setTimeout(() => this.showSucessMessage = false, 4000);
       //  this.resetForm(form);
+          this.resetForm(form);
+    
+          this.refresh(); 
+          //this.router.routerState
       },
       err => {
         if(err.status === 422) {
@@ -43,15 +52,19 @@ export class MakepostComponent implements OnInit {
         }
       }
     );
-    this.resetForm(form);
+    
+  
   }
-
+  refresh(): void {
+    window.location.reload();
+}
   resetForm(form: NgForm) {
     console.log('')
     this.postsService.selectedPost = {
       username: '',
       fullName: '',
-      text: ''
+      text: '',
+      date: 0
     };
     form.resetForm();
   //  this.serverErrorMessages = '';

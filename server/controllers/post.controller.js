@@ -7,7 +7,7 @@ module.exports.savePost = (req,res,next) => {
     post.username = req.body.username;
     post.fullName = req.body.fullName;
     post.text = req.body.text;
-   // post.date = req.body.date;
+    post.date = req.body.date;
    
     // post.username = "kelkft".
     // post.fullName = "Kelvin Ferreiras"
@@ -28,14 +28,23 @@ module.exports.savePost = (req,res,next) => {
 
 module.exports.getPost = (req,res) => {
 
-    Post.find({}, function(err, posts) {
+    Post.find().sort('-date').find(function (err, posts) {
         if(!err) {
             res.send(posts)
         }
         else{
             return next(err);
         }
+    });
+
+    // Post.find({}, function(err, posts) {
+    //     if(!err) {
+    //         res.send(posts)
+    //     }
+    //     else{
+    //         return next(err);
+    //     }
     
-      });
+    //   });
 }
 

@@ -9,6 +9,7 @@ import { GamesComponent } from './main/games/games.component';
 import { SettingsComponent } from './main/settings/settings.component';
 
 
+
 export const appRoutes: Routes = [
     {
         path: 'signup', component: UserComponent,
@@ -18,7 +19,7 @@ export const appRoutes: Routes = [
         path: 'main', component: MainComponent,
         children: [
             { path: 'profile', component: ProfileComponent },
-            { path: 'feed', component: FeedComponent },
+            { path: 'feed', component: FeedComponent},
             { path: 'chat', component: ChatComponent },
             { path: 'games', component: GamesComponent },
             { path: 'settings', component: SettingsComponent }
