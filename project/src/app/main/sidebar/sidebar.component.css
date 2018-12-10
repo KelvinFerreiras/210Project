@@ -1,7 +1,8 @@
 nav {
     background: #2D2E2E;
     height: 100%;
-    
+    position: fixed;
+    z-index: 1;
 }
 
 ul {
