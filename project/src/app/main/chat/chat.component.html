@@ -1,3 +1,30 @@
-<p>
-  chat works!
-</p>
+<div class="chat">
+  <div class="friendbar">
+    <button type="button" class="btn btn-primary">Primary</button>
+
+    <div class="friendbar-header">
+        <h3>Friends List</h3>
+    </div>
+
+    <ul class="list-unstyled components">
+        <li><a href="#">one</a></li>
+        <li> <a href="#">two</a></li>
+        <li><a href="#">three</a></li>
+    </ul>
+  </div>
+
+  <div class="chatbox">
+    <div class="message-input">
+        <form>
+          <div class="input-group">
+            <textarea id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info"></textarea>
+          </div>
+        </form>
+    </div>
+    <div class="message-history">
+        <div *ngFor="let s of array">
+          Hellossssssssssssssssssssssssssssssssssssssss {{s}} <br>
+        </div>
+    </div>
+  </div>
+</div>
