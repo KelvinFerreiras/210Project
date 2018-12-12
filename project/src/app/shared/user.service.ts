@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 export interface UserDetails {
   _id: string;
@@ -45,6 +46,7 @@ export class UserService {
     return this.token;
   }
 
+  //Extract details from token for simple purposes. Use profile instead. 
   getUserDetails(): UserDetails {
     const token = this.getToken();
     let payload;
@@ -61,5 +63,18 @@ export class UserService {
     this.token = '';
     window.localStorage.removeItem('token');
     this.router.navigateByUrl('/');
+  }
+
+  isLoggedIn(): boolean {
+    const user = this.getUserDetails();
+    if (user) {
+      return user.exp > Date.now() / 1000;
+    } else {
+      return false;
+    }
+  }
+
+  userProfile(): Observable<any> {
+    return this.http.get(environment.apiBaseUrl + '/userProfile');
   }
 }
