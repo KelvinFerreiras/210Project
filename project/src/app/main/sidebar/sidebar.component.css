@@ -18,3 +18,7 @@ a {
     padding: 20px;
     display: block;
 }
+
+li:hover {
+    background-color: darkgray;
+}
