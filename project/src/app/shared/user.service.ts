@@ -62,7 +62,7 @@ export class UserService {
   logout(): void {
     this.token = '';
     window.localStorage.removeItem('token');
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/login');
   }
 
   isLoggedIn(): boolean {
