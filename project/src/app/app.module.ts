@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {  FormsModule} from "@angular/forms";
+import { FormsModule} from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 
@@ -20,7 +20,7 @@ import { SettingsComponent } from './main/settings/settings.component';
 import { MakepostComponent } from './main/feed/posts/makepost/makepost.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { UserService } from './shared/user.service';
-
+import { AuthGuardService } from './shared/auth-guard.service';
 
 
 @NgModule({
@@ -45,7 +45,7 @@ import { UserService } from './shared/user.service';
     RouterModule.forRoot(appRoutes),
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, AuthGuardService],
   bootstrap: [  AppComponent/*,
     UserComponent,
     SignUpComponent,a

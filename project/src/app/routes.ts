@@ -8,8 +8,7 @@ import { ChatComponent } from './main/chat/chat.component';
 import { ProfileComponent } from './main/profile/profile.component';
 import { GamesComponent } from './main/games/games.component';
 import { SettingsComponent } from './main/settings/settings.component';
-
-
+import { AuthGuardService } from './shared/auth-guard.service';
 
 export const appRoutes: Routes = [
     {
@@ -21,7 +20,7 @@ export const appRoutes: Routes = [
         children: [{ path: '', component: SignInComponent }]
     },
     {
-        path: 'main', component: MainComponent,
+        path: 'main', component: MainComponent, canActivate: [AuthGuardService],
         children: [
             { path: 'profile', component: ProfileComponent },
             { path: 'feed', component: FeedComponent},
@@ -32,6 +31,6 @@ export const appRoutes: Routes = [
 
     },
     {
-        path: '', redirectTo: '/login', pathMatch: 'full'
+        path: '', redirectTo: '/main', pathMatch: 'full', canActivate: [AuthGuardService]
     }
 ];
