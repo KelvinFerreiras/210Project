@@ -13,8 +13,8 @@ const jwtHelper = require('../config/jwtHelper');
 
 router.post('/register', ctrlUser.register);
 router.post('/authenticate', ctrlUser.authenticate);
+router.get('/queryUsers', ctrlUser.queryUsers);
 router.get('/userProfile',jwtHelper.verifyJwtToken, ctrlUser.userProfile);
-
 
 router.post('/post', ctrlPost.savePost);
 

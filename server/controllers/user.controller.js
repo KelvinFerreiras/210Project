@@ -10,9 +10,9 @@ module.exports.register = (req,res,next) => {
     user.email = req.body.email;
     user.password = req.body.password;
 
-   // user.username = req.body.password;
-   // user.birthday = req.body.password;
-   user.username = 'userTest'+Date.now();
+    // user.username = req.body.password;
+    // user.birthday = req.body.password;
+    user.username = 'userTest'+Date.now();
     user.birthday = Date.now();
 
     
@@ -58,6 +58,20 @@ module.exports.userProfile = (req, res, next) => {
         }
     );
 }
+
+//Queries all users whose name matches
+module.exports.queryUsers = (req, res) => {
+    User.find({ fullName: {"$regex": req.headers.searchstring, "$options": "i"} }, 'fullName _id',
+        (err, users) => {
+            if(!users)
+                return res.status(404).json({ status: false, message: 'None exists' });
+            else 
+                return res.status(200).json({ status: true, users: users});
+        }
+    ).limit(parseInt(req.headers.limit));
+}
+
+
 // add a friend to a speficic user 
 // request body: {"username":"...", "newfriend":" ..."}
 
@@ -113,4 +127,18 @@ module.exports.getFriends = (req,res) => {
         }
     });
 }
+
+module.exports.getFriends = (req,res) => {
+
+    User.find({username: req.body.username}, {friends: 1 }, function (err, user) {
+        if(!err) {
+
+            res.send(user);
+        }
+        else{
+            return next(err);
+        }
+    });
+}
+
 

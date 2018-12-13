@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService} from '../../shared/user.service';
-import { User } from 'src/app/shared/user.model';
+import { UserService, UserDetails} from '../../shared/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +8,8 @@ import { User } from 'src/app/shared/user.model';
 })
 export class ProfileComponent implements OnInit {
   constructor(private userService: UserService) { }
-  details: User
+  details: UserDetails;
+  userResults: string;
 
   ngOnInit() {
     this.userService.userProfile().subscribe(user => {
@@ -17,6 +17,16 @@ export class ProfileComponent implements OnInit {
     }, (err) => {
       console.error(err);
     });
-  }
 
+    //Async test
+    setTimeout( __ => {
+      this.details.fullName = this.details.fullName + "_3";
+    }, 3000);
+
+    this.userService.queryUsers("b", 1).subscribe(result => {
+      console.log(result)
+    }, (err) => {
+      console.error(err);
+    });
+  }
 }

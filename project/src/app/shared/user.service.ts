@@ -61,7 +61,7 @@ export class UserService {
     return this.token;
   }
 
-  //Extract details from token for simple purposes. Use profile instead. 
+  //Get user data locally. 
   getUserDetails(): UserDetails {
     const token = this.getToken();
     let payload;
@@ -74,20 +74,26 @@ export class UserService {
     }
   }
 
+  //Get user data from server.
   userProfile(): Observable<any>{
+    // console.log({ headers: { Authorization: `Bearer ${this.getToken()}` }})
     return this.http.get(environment.apiBaseUrl + '/userProfile', { headers: { Authorization: `Bearer ${this.getToken()}` }});
   }
 
-  //
-addFriend(payload: {username:String, newfriend:String}){
-  return this.http.post(environment.apiBaseUrl+'/addFriend',payload);
-}
+  addFriend(payload: {username:String, newfriend:String}){
+    return this.http.post(environment.apiBaseUrl+'/addFriend',payload);
+  }
 
-deleteFriend(payload: {username:String, friendTOBeDeleted:String}){
-  return this.http.post(environment.apiBaseUrl+'/deleteFriend',payload);
-}
+  deleteFriend(payload: {username:String, friendTOBeDeleted:String}){
+    return this.http.post(environment.apiBaseUrl+'/deleteFriend',payload);
+  }
 
-getFriends(payload: {username:String}) {
-  return this.http.post( environment.apiBaseUrl+'/getFriends', payload);
-}
+  getFriends(payload: {username:String}) {
+    return this.http.post( environment.apiBaseUrl+'/getFriends', payload);
+  }
+
+  queryUsers(searchString:string, limit:number) {
+    // console.log({ headers: { searchString: searchString, limit: `${limit}` }})
+    return this.http.get(environment.apiBaseUrl + '/queryUsers', { headers: { searchString: searchString, limit: `${limit}` }});
+  }
 }
