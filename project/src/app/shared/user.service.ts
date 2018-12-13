@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export interface UserDetails {
   _id: string;
   email: string;
-  name: string;
+  fullName: string;
   exp: number;
 }
 
@@ -33,6 +33,21 @@ export class UserService {
 
   login(authCredentials) {
     return this.http.post(environment.apiBaseUrl + '/authenticate', authCredentials);
+  }
+
+  logout(): void {
+    this.token = '';
+    window.localStorage.removeItem('token');
+    this.router.navigateByUrl('/login');
+  }
+
+  isLoggedIn(): boolean {
+    const user = this.getUserDetails();
+    if (user) {
+      return user.exp > Date.now() / 1000;
+    } else {
+      return false;
+    }
   }
 
   setToken(token: string) {
@@ -59,22 +74,20 @@ export class UserService {
     }
   }
 
-  logout(): void {
-    this.token = '';
-    window.localStorage.removeItem('token');
-    this.router.navigateByUrl('/login');
+  userProfile(): Observable<any>{
+    return this.http.get(environment.apiBaseUrl + '/userProfile', { headers: { Authorization: `Bearer ${this.getToken()}` }});
   }
 
-  isLoggedIn(): boolean {
-    const user = this.getUserDetails();
-    if (user) {
-      return user.exp > Date.now() / 1000;
-    } else {
-      return false;
-    }
-  }
+  //
+addFriend(payload: {username:String, newfriend:String}){
+  return this.http.post(environment.apiBaseUrl+'/addFriend',payload);
+}
 
-  userProfile(): Observable<any> {
-    return this.http.get(environment.apiBaseUrl + '/userProfile');
-  }
+deleteFriend(payload: {username:String, friendTOBeDeleted:String}){
+  return this.http.post(environment.apiBaseUrl+'/deleteFriend',payload);
+}
+
+getFriends(payload: {username:String}) {
+  return this.http.post( environment.apiBaseUrl+'/getFriends', payload);
+}
 }

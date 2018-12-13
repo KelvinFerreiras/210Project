@@ -9,6 +9,19 @@ module.exports.register = (req,res,next) => {
     user.fullName = req.body.fullName;
     user.email = req.body.email;
     user.password = req.body.password;
+
+   // user.username = req.body.password;
+   // user.birthday = req.body.password;
+   user.username = 'userTest'+Date.now();
+    user.birthday = Date.now();
+
+    
+
+
+    user.bio = '';
+    user.friends=[];
+    user.created = Date.now();
+
     user.save((err, doc) => {
         if(!err) {
             res.send(doc);
@@ -45,3 +58,59 @@ module.exports.userProfile = (req, res, next) => {
         }
     );
 }
+// add a friend to a speficic user 
+// request body: {"username":"...", "newfriend":" ..."}
+
+module.exports.addFriend = (req,res,next) => {
+
+        User.findOneAndUpdate(
+            { username: req.body.username }, 
+            { $push: { 
+                      friends: {
+                        "username" : req.body.newfriend
+                        }  
+                   } 
+            }, function (err, user) {
+
+                return res.json(true);
+              }
+            
+            );
+
+}
+// delete a friend from a speficic user 
+// request body: {"username":"...", "friendTOBeDeleted":" ..."}
+
+module.exports.deleteFriend = (req,res,next) => {
+
+    User.findOneAndUpdate(
+        { username: req.body.username }, 
+        { $pull: { 
+                  friends: {
+                    "username" : req.body.friendTOBeDeleted
+                    }  
+               } 
+        }, function (err, user) {
+            return res.json(true);
+          }
+        
+        );
+
+}
+
+// return all friends from a speficic user 
+// request body: {"username":"..."}
+
+module.exports.getFriends = (req,res) => {
+
+    User.find({username: req.body.username}, {friends: 1 }, function (err, user) {
+        if(!err) {
+
+            res.send(user);
+        }
+        else{
+            return next(err);
+        }
+    });
+}
+

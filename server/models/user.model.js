@@ -18,8 +18,22 @@ var userSchema = new mongoose.Schema({
         required: 'Password name can\'t be empty',
         minlength : [4,'Password must be atleast 4 character long']
     },
-    saltSecret: String
+    saltSecret: String,
+    birthday: {
+        type: Number,
+        required: 'Birthday can\'t be empty',
+    },
+    username: {
+        type: String,
+        required: 'Username can\'t be empty',
+        unique: true
+    },
+    bio: String,
+    friends: [{username:String}]
+    
 });
+
+
 
 //custom validation for email
 userSchema.path('email').validate((val) => {
@@ -45,7 +59,7 @@ userSchema.methods.verifyPassword = function (password) {
 userSchema.methods.generateJwt = function () {
     return jwt.sign(
         {   _id: this._id,
-            name: this.fullName,
+            fullName: this.fullName,
             email: this.email
         },
         process.env.JWT_SECRET, 
