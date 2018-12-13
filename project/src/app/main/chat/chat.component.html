@@ -1,40 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-<div class="container">
- <br>
- <div class="jumbotron">
- <h1 class="display-4">Send Message</h1>
- <textarea id = "message" class="form-control" placeholder="Your Message Here">
-</textarea>
- <br>
- <button id="send" class="btn btn-success">Send</button>
- </div>
- <div id="messages">
+<div class="chat">
+  <div class="friendbar">
+    <button type="button" class="btn btn-primary">Primary</button>
+
+    <div class="friendbar-header">
+        <h3>Friends List</h3>
+    </div>
+
+    <ul class="list-unstyled components">
+        <li><a href="#">one</a></li>
+        <li> <a href="#">two</a></li>
+        <li><a href="#">three</a></li>
+    </ul>
+  </div>
+
+  <div class="chatbox">
+    <div class="message-input">
+        <form>
+          <div class="input-group">
+            <textarea id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info"></textarea>
+          </div>
+        </form>
+    </div>
+    <div class="message-history">
+        <div *ngFor="let s of array">
+          Hellossssssssssssssssssssssssssssssssssssssss {{s}} <br>
+        </div>
+    </div>
+  </div>
 </div>
-</div>
-<script>
-  /*var socket = io();
-    $(() => {
-        $("#send").click(()=>{
-            sendMessage({name: $("#name").val(), message: $("#message").val()});
-        })
-        getMessages()
-    })
-    socket.on('message', addMessages)
-    function addMessages(message){
-        $("#messages").append(<h4> ${message.name} </h4> <p> ${message.message} </p>)
-    }
-    function getMessages(){
-      $.get('http://localhost:3000/messages', (data) => {
-        data.forEach(addMessages);
-      })
-    }
-    function sendMessage(message){
-      $.post('http://localhost:3000/messages', message)
-    }*/
-</script>
-</body>
-</html>
