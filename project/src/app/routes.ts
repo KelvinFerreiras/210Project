@@ -31,6 +31,6 @@ export const appRoutes: Routes = [
 
     },
     {
-        path: '', redirectTo: '/main', pathMatch: 'full', canActivate: [AuthGuardService]
+        path: '', redirectTo: '/main/feed', pathMatch: 'full', canActivate: [AuthGuardService]
     }
 ];
