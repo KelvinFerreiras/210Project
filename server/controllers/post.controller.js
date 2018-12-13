@@ -48,3 +48,35 @@ module.exports.getPost = (req,res) => {
     //   });
 }
 
+
+
+
+module.exports.editPost = (req,res,next) => {
+
+    Post.findOneAndUpdate(
+        { _id: req.body.id }, 
+        { $set: { 
+                  text: req.body.newText
+               } 
+        }, function (err, user) {
+
+            return res.json(true);
+          }
+        
+        );
+
+}
+
+module.exports.deletePost = (req,res,next) => {
+
+    Post.remove({ _id: req.body.id }, function(err) {
+        if (!err) {
+                res.status(200);
+        }
+        else {
+              res.status(500);
+        }
+    });
+
+
+}
