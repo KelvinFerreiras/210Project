@@ -77,4 +77,17 @@ export class UserService {
   userProfile(): Observable<any> {
     return this.http.get(environment.apiBaseUrl + '/userProfile');
   }
+
+  //
+addFriend(payload: {username:String, newfriend:String}){
+  return this.http.post(environment.apiBaseUrl+'/addFriend',payload);
+}
+
+deleteFriend(payload: {username:String, friendTOBeDeleted:String}){
+  return this.http.post(environment.apiBaseUrl+'/deleteFriend',payload);
+}
+
+getFriends(payload: {username:String}) {
+  return this.http.post( environment.apiBaseUrl+'/posts', payload);
+}
 }

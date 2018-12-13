@@ -28,7 +28,7 @@ router.get('/posts', ctrlPost.getPost );
 
 router.post('/addFriend', ctrlUser.addFriend);
 router.post('/deleteFriend', ctrlUser.deleteFriend);
-router.get('/getFriends', ctrlUser.getFriends);
+router.post('/getFriends', ctrlUser.getFriends);
 
 
 

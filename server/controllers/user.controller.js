@@ -59,7 +59,7 @@ module.exports.userProfile = (req, res, next) => {
     );
 }
 // add a friend to a speficic user 
-// params: {"username":"...", "newfriend":" ..."}
+// request body: {"username":"...", "newfriend":" ..."}
 
 module.exports.addFriend = (req,res,next) => {
 
@@ -78,6 +78,8 @@ module.exports.addFriend = (req,res,next) => {
             );
 
 }
+// delete a friend from a speficic user 
+// request body: {"username":"...", "friendTOBeDeleted":" ..."}
 
 module.exports.deleteFriend = (req,res,next) => {
 
@@ -85,7 +87,7 @@ module.exports.deleteFriend = (req,res,next) => {
         { username: req.body.username }, 
         { $pull: { 
                   friends: {
-                    "username" : req.body.newfriend
+                    "username" : req.body.friendTOBeDeleted
                     }  
                } 
         }, function (err, user) {
@@ -95,6 +97,9 @@ module.exports.deleteFriend = (req,res,next) => {
         );
 
 }
+
+// return all friends from a speficic user 
+// request body: {"username":"..."}
 
 module.exports.getFriends = (req,res) => {
 
@@ -107,15 +112,5 @@ module.exports.getFriends = (req,res) => {
             return next(err);
         }
     });
-
-    // User.find({username: req.body.username})
-    // .populate({
-    //     path:'friends',
-    //     model: {_id:String, username:String}
-    // })
-    // .exec(function(err,docs){
-    //     res.json(docs);
-
-    // })
 }
 
