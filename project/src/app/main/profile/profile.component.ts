@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../shared/user.service';
+import { UserService} from '../../shared/user.service';
+import { User } from 'src/app/shared/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -7,14 +8,15 @@ import { UserService } from '../../shared/user.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
   constructor(private userService: UserService) { }
+  details: User
 
-  userDetails = this.userService.getUserDetails();
-  exp = new Date(0);
-  __ = this.exp.setUTCSeconds(this.userDetails.exp);
-  
   ngOnInit() {
+    this.userService.userProfile().subscribe(user => {
+      this.details = user.user;
+    }, (err) => {
+      console.error(err);
+    });
   }
 
 }

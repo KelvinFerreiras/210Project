@@ -45,7 +45,7 @@ userSchema.methods.verifyPassword = function (password) {
 userSchema.methods.generateJwt = function () {
     return jwt.sign(
         {   _id: this._id,
-            name: this.fullName,
+            fullName: this.fullName,
             email: this.email
         },
         process.env.JWT_SECRET, 
