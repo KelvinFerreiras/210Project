@@ -25,7 +25,7 @@ export class MakepostComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.currentPost= {
-        username: 'Username-Test-'+Date.now(),
+        username: 'Username-Test-'+ Date.now(),
          fullName: 'FullName-Test',
          text: form.value.text,
          date: Date.now()
