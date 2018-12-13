@@ -88,6 +88,6 @@ deleteFriend(payload: {username:String, friendTOBeDeleted:String}){
 }
 
 getFriends(payload: {username:String}) {
-  return this.http.post( environment.apiBaseUrl+'/posts', payload);
+  return this.http.post( environment.apiBaseUrl+'/getFriends', payload);
 }
 }
