@@ -27,5 +27,15 @@ export class PostsService {
   }
   getAllPosts() {
     return this.http.get(environment.apiBaseUrl+'/posts');
+
+    
+  }
+
+  editPost(payload:{id: String, newtext: String}) {
+    return this.http.post(environment.apiBaseUrl+'/editPost', payload);
+  }
+
+  deletePost(payload:{id: String}) {
+    return this.http.post(environment.apiBaseUrl+'/deletePost', payload);
   }
 }
