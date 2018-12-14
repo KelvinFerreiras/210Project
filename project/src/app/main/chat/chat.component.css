@@ -1,40 +1,48 @@
-.friendbar{
-    top: 0;
-    left: 56px;
+#search-card, #friend-card, #message-card{
+    height: 97vh;
+    background-color: rgb(207, 207, 207);
+    background-color: white;
+    min-width: 300px;
+}
 
-    min-width: 250px;
-    max-width: 250px;
-    min-height: 100vh;
-    background-color: #2481b8;
+#search-card{
+}
 
-    position: fixed;
-    padding-top: 25px;
+#friend-card{
+}
 
+#message-card{
+    margin-right: 0px;
+}
+
+.form-control{
+    margin: 0;
+    margin-right: 1px;
+}
+
+.row{
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: -30px;
+    background-color: rgb(207, 207, 207);
+}
+
+.col, .col-6{
+    padding: 0px;
+}
+
+.card-header{
     text-align: center;
-    overflow-x: hidden;
+    font-weight: bold;
+    font-size: 24px;
+    color: rgb(138, 138, 138);
 }
 
-.friendbar-header{
-    color:  white;
-}
-
-.message-input{
-    position: fixed;
-    bottom: 0;
-    left: 306px;
-    background-color: rgb(144, 144, 194);
-    min-width: 100%;
-    height: 100px;
-}
-
-.message-history{
+#message-body{
     display: flex;
     flex-direction: column-reverse;
-    position: absolute;
-    top: 0;
-    bottom: 100px;
-    left: 306px;
-    right: 0;
     overflow: scroll;
     overflow-x: hidden;
 }
+
+    
