@@ -25,7 +25,7 @@ router.get('/test', (req, res) => {
 
 router.get('/posts', ctrlPost.getPost );
 router.post('/editPost', ctrlPost.editPost);
-router.post('/deletePost', ctrlPost.deletePost );
+router.delete('/deletePost', ctrlPost.deletePost );
 
 
 router.post('/addFriend', ctrlUser.addFriend);

@@ -71,10 +71,10 @@ module.exports.deletePost = (req,res,next) => {
 
     Post.remove({ _id: req.body.id }, function(err) {
         if (!err) {
-                res.status(200);
+                res.status(200).json(true);
         }
         else {
-              res.status(500);
+              res.status(500).json(false);
         }
     });
 
