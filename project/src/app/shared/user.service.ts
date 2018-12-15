@@ -61,6 +61,21 @@ export class UserService {
     return this.token;
   }
 
+  deleteToken() {
+    localStorage.removeItem('token');
+  }
+
+  getUserPayload() {
+    var token = localStorage.getItem('token');
+    if(token) {
+      var userPayload = atob(token.split('.')[1]);
+      return JSON.parse(userPayload);
+    }
+    else {
+      return null;
+    }
+  }
+
   //Get user data locally. 
   getUserDetails(): UserDetails {
     const token = this.getToken();
