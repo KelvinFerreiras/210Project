@@ -1,0 +1,37 @@
+.friendbar{
+    top: 0;
+    left: 56px;
+
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+    background-color: #2481b8;
+
+    position: fixed;
+    padding-top: 25px;
+
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.friendbar-header{
+    color:  white;
+}
+
+/* .message-input{
+    position: fixed;
+    bottom: 0;
+    left: 306px;
+    background-color: rgb(144, 144, 194);
+    min-width: 100%;
+    height: 100px;
+} */
+
+ .message-history{
+    
+    position: fixed;
+    bottom: 50px;
+    left: 385px;
+    right: 100;
+ 
+} 

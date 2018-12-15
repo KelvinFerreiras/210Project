@@ -21,6 +21,7 @@ import { MakepostComponent } from './main/feed/posts/makepost/makepost.component
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { UserService } from './shared/user.service';
 import { AuthGuardService } from './shared/auth-guard.service';
+import { PongGameComponent } from './main/games/pong/pong.component'
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AuthGuardService } from './shared/auth-guard.service';
     GamesComponent,
     SettingsComponent,
     MakepostComponent,
-    SignInComponent
+    SignInComponent,
+    PongGameComponent
     ],
   imports: [
     BrowserModule,
