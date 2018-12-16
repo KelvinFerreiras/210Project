@@ -107,7 +107,7 @@ export class UserService {
     return this.http.post( environment.apiBaseUrl+'/getFriends', payload);
   }
 
-  queryUsers(searchString:string, limit:number) {
+  queryUsers(searchString:string, limit:number): Observable<any> {
     // console.log({ headers: { searchString: searchString, limit: `${limit}` }})
     return this.http.get(environment.apiBaseUrl + '/queryUsers', { headers: { searchString: searchString, limit: `${limit}` }});
   }

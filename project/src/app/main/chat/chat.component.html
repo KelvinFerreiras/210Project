@@ -7,16 +7,30 @@
       <div class="card-body">
         <!-- Search input field -->
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Find username">
+          <input #searchbox (keyup.enter)="onEnter(searchbox.value)" type="text" class="form-control" placeholder="Find username">
           <div class="input-group-append">
-            <span class="input-group-text" id="search-append"> 
+            <button (click)="onEnter(searchbox.value)" class="input-group-text" id="search-append"> 
                 <i class="material-icons">search</i>
-            </span>
+            </button>
           </div>
         </div>
-        fdfsd
+        <hr/>
+        <!-- Users appear here-->
+        <div *ngFor="let user of array2">
+          <div class="media border p-3" style="max-height: 60px; margin-top: 5px;">
+              <img src="../../../favicon.ico" alt="John Doe" class="align-self-center">
+              <div class="media-body align-self-center">
+                <p style="margin: auto;"> {{user}} </p>
+              </div>
+            </div>
+        </div>
+
 
       </div> 
+
+      <div class="card-footer">
+
+      </div>
     </div>
   </div>
 
@@ -29,10 +43,11 @@
   </div>
 
   <!-- Message bar -->
-  <div class="col-6">
-      <div class="card" id="message-card">
+  <div class="col-xl-6">
+      <div class="card example-1" id="message-card">
         <div class="card-header">Messages</div>
-        <div class="card-body" id="message-body">
+        
+        <div class="card-body scrollbar-gray" id="message-body">
             <div class="message-history">
                 <div *ngFor="let s of array">
                   Hellossssssssssssssssssssssssssssssssssssssss {{s}} <br>

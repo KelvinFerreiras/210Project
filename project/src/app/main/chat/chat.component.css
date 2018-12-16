@@ -27,7 +27,7 @@
     background-color: rgb(207, 207, 207);
 }
 
-.col, .col-6{
+.col, .col-xl-6{
     padding: 0px;
 }
 
@@ -44,5 +44,26 @@
     overflow: scroll;
     overflow-x: hidden;
 }
+ 
+.scrollbar-gray::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #F5F5F5;
+border-radius: 10px; }
 
-    
+.scrollbar-gray::-webkit-scrollbar {
+width: 12px;
+background-color: #F5F5F5; }
+
+.scrollbar-gray::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #a7a7a7; }
+
+.square::-webkit-scrollbar-track {
+border-radius: 0 !important; }
+
+.square::-webkit-scrollbar-thumb {
+border-radius: 0 !important; }
+
+.thin::-webkit-scrollbar {
+width: 6px; }
