@@ -20,12 +20,7 @@ import { GamesComponent } from './main/games/games.component';
 import { SettingsComponent } from './main/settings/settings.component';
 import { MakepostComponent } from './main/feed/posts/makepost/makepost.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
-<<<<<<< HEAD
-import { UserService } from './shared/user.service';
-import { AuthGuardService } from './shared/auth-guard.service';
 import { PongGameComponent } from './main/games/pong/pong.component'
-=======
->>>>>>> 83dc54c75a6ccd939c0a204f004d88c92d379b80
 
 import { UserService } from './shared/user.service';
 import { AuthGuard } from "./auth/auth.guard";
