@@ -23,8 +23,8 @@ export class ProfileComponent implements OnInit {
       this.details.fullName = this.details.fullName + "_3";
     }, 3000);
 
-    this.userService.queryUsers("b", 1).subscribe(result => {
-      console.log(result)
+    this.userService.queryUsers("b", 3).subscribe(result => {
+      console.log(result.users)
     }, (err) => {
       console.error(err);
     });

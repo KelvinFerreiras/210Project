@@ -61,6 +61,21 @@ export class UserService {
     return this.token;
   }
 
+  deleteToken() {
+    localStorage.removeItem('token');
+  }
+
+  getUserPayload() {
+    var token = localStorage.getItem('token');
+    if(token) {
+      var userPayload = atob(token.split('.')[1]);
+      return JSON.parse(userPayload);
+    }
+    else {
+      return null;
+    }
+  }
+
   //Get user data locally. 
   getUserDetails(): UserDetails {
     const token = this.getToken();
@@ -92,7 +107,7 @@ export class UserService {
     return this.http.post( environment.apiBaseUrl+'/getFriends', payload);
   }
 
-  queryUsers(searchString:string, limit:number) {
+  queryUsers(searchString:string, limit:number): Observable<any> {
     // console.log({ headers: { searchString: searchString, limit: `${limit}` }})
     return this.http.get(environment.apiBaseUrl + '/queryUsers', { headers: { searchString: searchString, limit: `${limit}` }});
   }
