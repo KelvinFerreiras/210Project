@@ -18,7 +18,8 @@ export class PostsService {
     fullName: '',
     text: '',
     date: 0
-  };
+    //, image: null
+   };
 
   constructor(private http: HttpClient) { }
 
@@ -27,8 +28,6 @@ export class PostsService {
   }
   getAllPosts() {
     return this.http.get(environment.apiBaseUrl+'/posts');
-
-    
   }
 
   editPost(payload:{id: String, newtext: String}) {

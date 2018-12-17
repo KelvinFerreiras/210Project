@@ -10,6 +10,7 @@ export interface UserDetails {
   _id: string;
   email: string;
   fullName: string;
+  username: string;
   exp: number;
 }
 

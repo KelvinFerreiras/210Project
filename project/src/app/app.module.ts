@@ -25,6 +25,13 @@ import { PongGameComponent } from './main/games/pong/pong.component'
 import { UserService } from './shared/user.service';
 import { AuthGuard } from "./auth/auth.guard";
 
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +53,16 @@ import { AuthGuard } from "./auth/auth.guard";
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FlexLayoutModule
+    
   ],
   providers: [UserService, AuthGuard],
   bootstrap: [  AppComponent/*,

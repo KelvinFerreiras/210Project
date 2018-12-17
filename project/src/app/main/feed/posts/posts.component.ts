@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../../../shared/posts.service';
 import { Post } from '../../../shared/post.model';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @Component({
   selector: 'app-posts',

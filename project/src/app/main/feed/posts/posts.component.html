@@ -1,7 +1,8 @@
-<div class="container">
+<!-- <div class="container">
   <h1>Posts</h1>
   <div class="wrapper">
     <app-makepost></app-makepost>
+
     <div class="post container-fluid" *ngFor="let post of posts$">
         <div class="header">
           <a routerLink="/user/{{post.username}}">{{post.fullName}}  - ({{post.username}})</a>
@@ -11,5 +12,42 @@
           <div class="date ">{{post.date | date:'short' }}</div>
         </div>
     </div>
+
+
   </div>
+</div> -->
+
+
+
+<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <app-makepost></app-makepost>
+
+    <mat-card fxFlex="20%" class="example-card"  *ngFor="let post of posts$">
+  
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <div class="mat-card-header-text">
+              <mat-card-title>
+                  <a fxFlex="80%" routerLink="/user/{{post.username}}">{{post.fullName}}  </a>
+                  <mat-icon fxFlex="10%">mode_edit</mat-icon>
+                  <mat-icon fxFlex="10%" >delete</mat-icon> 
+              </mat-card-title>
+                <mat-card-subtitle>({{post.username}})</mat-card-subtitle>
+
+          </div>
+         
+           
+        </mat-card-header>
+      
+        <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+        <mat-card-content>
+          <div class="textContent"><p>{{post.text}}</p></div>
+      
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="date ">{{post.date | date:'short' }}</div>
+        </mat-card-actions>
+      </mat-card>
 </div>
+
+

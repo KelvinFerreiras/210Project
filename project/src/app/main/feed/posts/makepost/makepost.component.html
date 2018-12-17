@@ -10,14 +10,19 @@
           </button>
         </div>
         <div class="modal-body">
-          <form #makePostForm="ngForm" (ngSubmit)="makePostForm.valid && onSubmit(makePostForm)">
+            <form action='/api/images' method="post" enctype="multipart/form-data">
+              <input type='file' name='image' />
+            </form>
+          <form #makePostForm="ngForm" (ngSubmit)="makePostForm.valid && onSubmit(makePostForm)" action='/api/images' method="post" enctype="multipart/form-data">
  
             <textarea class="form-control" id="message-text" type="text" #text="ngModel" [(ngModel)]="postsService.selectedPost.text" name="text"></textarea>
-            
+            <input type='file' name='image' #image="ngModel" [(ngModel)]="postsService.selectedPost.image"/>
+
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary" [disabled]="!makePostForm.valid" >Publish</button>
             </div>
+
 
           </form>
         </div>

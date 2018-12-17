@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../../../../shared/posts.service';
+import { UserService } from '../../../../shared/user.service';
+
 import { Post } from '../../../../shared/post.model';
 import {Router} from '@angular/router';
 
@@ -17,7 +19,7 @@ export class MakepostComponent implements OnInit {
 
   
 
-  constructor(private postsService: PostsService , private router: Router) { }
+  constructor(private postsService: PostsService, private userService: UserService , private router: Router) { }
 
   ngOnInit() {
 
@@ -25,10 +27,11 @@ export class MakepostComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.currentPost= {
-        username: 'Username-Test-'+ Date.now(),
-         fullName: 'FullName-Test',
+        username: this.userService.getUserDetails().username,
+         fullName: this.userService.getUserDetails().fullName,
          text: form.value.text,
          date: Date.now()
+        // ,image: form.value.image
          
     };
     
@@ -38,9 +41,11 @@ export class MakepostComponent implements OnInit {
      //   this.showSucessMessage = true;
       //  setTimeout(() => this.showSucessMessage = false, 4000);
       //  this.resetForm(form);
+         // console.log(this.userService.getToken());
           this.resetForm(form);
     
           this.refresh(); 
+
           //this.router.routerState
       },
       err => {
@@ -65,6 +70,7 @@ export class MakepostComponent implements OnInit {
       fullName: '',
       text: '',
       date: 0
+      //,image: null
     };
     form.resetForm();
   //  this.serverErrorMessages = '';

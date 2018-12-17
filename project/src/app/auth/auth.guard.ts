@@ -3,7 +3,6 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Observable } from 'rxjs';
 import { UserService } from "../shared/user.service";
 import { Router } from "@angular/router";
-import { userInfo } from 'os';
 
 @Injectable({
   providedIn: 'root'

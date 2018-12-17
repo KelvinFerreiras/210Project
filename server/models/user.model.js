@@ -60,6 +60,7 @@ userSchema.methods.generateJwt = function () {
     return jwt.sign(
         {   _id: this._id,
             fullName: this.fullName,
+            username: this.username,
             email: this.email
         },
         process.env.JWT_SECRET, 
