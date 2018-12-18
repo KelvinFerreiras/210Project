@@ -38,22 +38,16 @@ export class MakepostComponent implements OnInit {
     this.postsService.addPost(this.currentPost).subscribe(
       
       res => {
-     //   this.showSucessMessage = true;
-      //  setTimeout(() => this.showSucessMessage = false, 4000);
-      //  this.resetForm(form);
-         // console.log(this.userService.getToken());
+
           this.resetForm(form);
     
           this.refresh(); 
 
-          //this.router.routerState
       },
       err => {
         if(err.status === 422) {
-       //   this.serverErrorMessages = err.error.join('<br />');
         }
         else {
-//this.serverErrorMessages = 'Something went wrong. Please try again later.'
         }
       }
     );

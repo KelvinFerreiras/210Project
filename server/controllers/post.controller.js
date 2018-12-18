@@ -53,6 +53,7 @@ module.exports.getPost = (req,res) => {
 
 module.exports.editPost = (req,res,next) => {
 
+
     Post.findOneAndUpdate(
         { _id: req.body.id }, 
         { $set: { 
@@ -60,7 +61,13 @@ module.exports.editPost = (req,res,next) => {
                } 
         }, function (err, user) {
 
-            return res.json(true);
+
+            if (!err) {
+                res.json(true);
+        }
+            else {
+              res.json(false);
+            }
           }
         
         );

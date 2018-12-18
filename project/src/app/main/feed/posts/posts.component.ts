@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../../../shared/posts.service';
+import { UserService } from '../../../shared/user.service';
 import { Post } from '../../../shared/post.model';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgForm } from '@angular/forms';
+
+//import { ConsoleReporter } from 'jasmine';
 
 
 @Component({
@@ -12,39 +16,118 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 export class PostsComponent implements OnInit {
 
   posts$: Object
-  // posts$=[
-  //   //new Post({"kelkft","Kelvin", "Ferreiras"}, {"Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World"},  {"2018-06-28T00:00:00.000Z"}),
-  //   new Post("kelkft","Kelvin", "Ferreiras", "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World",  "2018-06-28T00:00:00.000Z"),
-  //   new Post("kelkft","Kelvin", "Ferreiras", "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World",  "2018-06-28T00:00:00.000Z"),
-  //   new Post("kelkft","Kelvin", "Ferreiras", "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World",  "2018-06-28T00:00:00.000Z"),
-  //   new Post("kelkft","Kelvin", "Ferreiras", "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World",  "2018-06-28T00:00:00.000Z"),
-  //   new Post("kelkft","Kelvin", "Ferreiras", "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World",  "2018-06-28T00:00:00.000Z")
+  currentPostId: String
+  currentPostText: String
+  
 
-  // ]
+  constructor(private postsService: PostsService, private userService: UserService) { }
 
-  constructor(private postsService: PostsService) { }
+  isCurrentUsersPost(postUserName: String){
+
+    return (this.userService.getUserDetails().username == postUserName);
+  }
+
+  setCurrentPostId(id:String){
+    this.currentPostId= id;
+  }
+
+  getCurrentPostId(){
+    return this.currentPostId;
+  }
+
+  preparePostTobeEdited(id:String, text:String){
+    this.currentPostId= id;
+    this.currentPostText= text;
+
+
+  }
 
   ngOnInit() {
 
-    //this.posts$= "{\"user\": {\"username\": \"kelkft\",\"firstName\": \"Kelvin\",\"lastName\": \"Ferreiras\"},\"content\": {\"text\": \"Hello World\"},\"details\": {\"date\": \"2018-06-25T00:00:00.000Z\"}}"
-    // this.posts$= [
-    //   {"user": {"username": "kelkft","firstName": "Kelvin","lastName": "Ferreiras"},"content": {"text": "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World"},"details": {"date": "2018-06-28T00:00:00.000Z"}},
-    //   {"user": {"username": "hjotot","firstName": "John","lastName": "Doe"},"content": {"text": "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World"},"details": {"date": "2018-07-11T00:00:00.000Z"}},
-    //   {"user": {"username": "kfkkfk","firstName": "Jane","lastName": "Doe"},"content": {"text": "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World"},"details": {"date": "2018-08-12T00:00:00.000Z"}},
-    //   {"user": {"username": "hdfood","firstName": "Charlie","lastName": "Brown"},"content": {"text": "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World"},"details": {"date": "2018-09-13T00:00:00.000Z"}},
-    //   {"user": {"username": "gjkfkfo","firstName": "Hommer","lastName": "Simpson"},"content": {"text": "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World"},"details": {"date": "2018-03-25T00:00:00.000Z"}},
-    //   {"user": {"username": "kfkkfkf","firstName": "Jose","lastName": "Perez"},"content": {"text": "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World"},"details": {"date": "2018-05-21T00:00:00.000Z"}},
-    //   {"user": {"username": "uuyutur","firstName": "Maria","lastName": "Jones"},"content": {"text": "Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World, Hello World"},"details": {"date": "2018-09-01T00:00:00.000Z"}}
-    // ]
+   
     this.postsService.getAllPosts().subscribe(posts => {
       this.posts$ =JSON.parse(JSON.stringify(posts));
 
-      //this.posts$ = JSON.parse(JSON.stringify(posts));
     });
 
 
-   // console.log(this.posts$[0].user.username)
+  }
 
+
+  edit_payload:{
+    id: String;
+    newText: String;
+  }
+
+  onSubmitEdit(form: NgForm) {
+
+
+    this.edit_payload={
+      id: this.currentPostId,
+      newText:form.value.text
+    }
+    
+    this.postsService.editPost( this.edit_payload ).subscribe(
+      
+      res => {
+
+          this.resetForm(form);
+    
+          this.refresh(); 
+
+      },
+      err => {
+        if(err.status === 422) {
+        }
+        else {
+        }
+      }
+    );
+    
+  
+  }
+  delete_payload:{
+    id: String;
+  }
+
+  onSubmitDelete(form: NgForm) {
+
+
+    this.delete_payload={
+      id: this.currentPostId,
+    }
+    
+    this.postsService.deletePost( this.delete_payload ).subscribe(
+      
+      res => {
+
+          this.resetForm(form);
+    
+          this.refresh(); 
+
+      },
+      err => {
+        if(err.status === 422) {
+        }
+        else {
+        }
+      }
+    );
+    
+    
+  
+  }
+
+  refresh(): void {
+    window.location.reload();
+  }
+
+  resetForm(form: NgForm) {
+    this.edit_payload={
+      id: "",
+      newText:""
+    };
+    form.resetForm();
   }
 
 }

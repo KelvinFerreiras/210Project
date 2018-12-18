@@ -1,1 +1,8 @@
 @import "~bootstrap/dist/css/bootstrap.css";
+
+.makepost{
+    margin-bottom: 15px;
+    width: 250px !important;
+}
+
+

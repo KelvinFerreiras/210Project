@@ -17,6 +17,10 @@ a {
     font-weight: bold;
     color:#00A8FF;
 } */
+
+@import "~bootstrap/dist/css/bootstrap.css";
+
+
 .mat-card-header {
     margin: 0 0px !important;
 }
@@ -26,7 +30,7 @@ a {
 }
 div.mat-card-header-text {
     width: 100%;
-    margin: 0 0px !important;
+    margin: 0 -15px !important;
 
 }
 
@@ -62,7 +66,7 @@ div.mat-card-header-text {
   .example-card {
     border-radius: 8px;
     padding: 20px;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
     align-self: center;
     width: 65%;
     flex: 0 1 100% !important;
@@ -73,6 +77,18 @@ div.mat-card-header-text {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
   }
+
+  .mat-card-avatar{
+    background-image: url(https://material.angular.io/assets/img/examples/shiba1.jpg);
+    background-size: cover;
+}
+
+h1{
+    /* font-family: 'Grand Hotel', cursive; */
+    font-family: 'Lobster', cursive;
+    padding: 25px;
+    font-size: 50px;
+}
 
   @media screen and (max-width: 600px) {    
       .example-card {

@@ -1,4 +1,4 @@
-<div><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#post-modal" routerLink="makepost" >Make a Post</button>
+<div><button type="button" class="btn btn-primary makepost" data-toggle="modal" data-target="#post-modal" routerLink="makepost" >Make a Post</button>
 
   <div class="modal fade" id="post-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -10,13 +10,10 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action='/api/images' method="post" enctype="multipart/form-data">
-              <input type='file' name='image' />
-            </form>
+            
           <form #makePostForm="ngForm" (ngSubmit)="makePostForm.valid && onSubmit(makePostForm)" action='/api/images' method="post" enctype="multipart/form-data">
  
             <textarea class="form-control" id="message-text" type="text" #text="ngModel" [(ngModel)]="postsService.selectedPost.text" name="text"></textarea>
-            <input type='file' name='image' #image="ngModel" [(ngModel)]="postsService.selectedPost.image"/>
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -32,18 +29,3 @@
   </div>
 </div>
 
-
-<!-- <form #makePostForm="ngForm" (ngSubmit)="makePostForm.valid && onSubmit(makePostForm)">
- 
-  <input type="text" #text="ngModel" [(ngModel)]="postsService.selectedPost.text" name="text">
-
-  <input type="submit" value="Publish">
-</form> -->
-
-<!-- <script>
-  $('#post-modal').click(function() {
-
-    $('#post-modal').modal('hide');
-    return false;
-  });
-</script> -->

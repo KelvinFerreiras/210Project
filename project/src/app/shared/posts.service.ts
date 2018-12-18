@@ -30,11 +30,11 @@ export class PostsService {
     return this.http.get(environment.apiBaseUrl+'/posts');
   }
 
-  editPost(payload:{id: String, newtext: String}) {
+  editPost(payload:Object) {
     return this.http.post(environment.apiBaseUrl+'/editPost', payload);
   }
 
-  deletePost(payload:{id: String}) {
+  deletePost(payload:Object) {
     return this.http.post(environment.apiBaseUrl+'/deletePost', payload);
   }
 }
