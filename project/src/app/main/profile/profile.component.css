@@ -1,0 +1,53 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.card-profile {
+    margin-top: 80px;
+    text-align: center;
+
+       
+        align-self: center !important;
+        min-width: 90% !important;
+        flex: 0 1 100% !important;
+    
+      
+  }
+  .card-profile .card-avatar {
+    margin: -50px auto 0;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0;
+  }
+  .card-profile .card-avatar + .card-body {
+    margin-top: 15px;
+  }
+  .card-profile .card-avatar img {
+    width: 100%;
+    height: auto;
+  }
+  .card-profile .card-body + .card-footer {
+    margin-top: -15px;
+  }
+  .card-profile .card-footer .btn.btn-just-icon {
+    font-size: 20px;
+    padding: 12px 12px;
+    line-height: 1em;
+  }
+  .card-profile.card-plain .card-avatar {
+    margin-top: 0;
+  }
+  .card-profile .card-header:not([class*="card-header-"]) {
+    background: transparent;
+  }
+  .card-profile .card-avatar {
+    max-width: 130px;
+    max-height: 130px;
+  }
+
+  .container {
+    min-height: 100%;
+    width: 100%;
+    align-items: center !important;
+    min-width: 350px;
+    place-content: stretch !important;
+
+  }

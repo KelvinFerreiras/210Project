@@ -61,6 +61,8 @@ userSchema.methods.generateJwt = function () {
         {   _id: this._id,
             fullName: this.fullName,
             username: this.username,
+            bio: this.bio,
+            birthday: this.birthday,
             email: this.email
         },
         process.env.JWT_SECRET, 
