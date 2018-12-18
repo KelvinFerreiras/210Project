@@ -22,13 +22,17 @@ export class ChatComponent implements OnInit {
   ngOnInit(){
   }
   
-  onEnter(value: string){ 
+  search(value: string){ 
     this.array2 = [];
-
+ 
     if(value != ""){
       this.userService.queryUsers(value, 100).subscribe(result => {
+        console.log(result.users);
         for (var i of result.users) {
-          this.array2.push(i.fullName);
+          if(i.username != this.userService.getUserDetails().username){
+            var person = {fullName: i.fullName, username: i.username};
+            this.array2.push(person);
+          }
         }
       }, (err) => {
         console.error(err);
@@ -36,7 +40,36 @@ export class ChatComponent implements OnInit {
     }
   }
 
+  test(){
+    this.array2.push(3);
+  }
+
+  addFriend(friend: string){ 
+    this.userService.addFriend({username: this.userService.getUserDetails().username, newfriend: friend}).subscribe(result => {
+      console.log(result);
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  getFriends(){
+    this.userService.getFriends({username: this.userService.getUserDetails().username}).subscribe(result => {
+      console.log(result);
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  wipeFriends(){
+    this.userService.wipeFriends({username: this.userService.getUserDetails().username}).subscribe(result => {
+      console.log(result);
+    }, (err) => {
+      console.error(err);
+    });
+  }
 }
+
+
 
 
   

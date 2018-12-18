@@ -14,7 +14,7 @@ const jwtHelper = require('../config/jwtHelper');
 router.post('/register', ctrlUser.register);
 router.post('/authenticate', ctrlUser.authenticate);
 router.get('/queryUsers', ctrlUser.queryUsers);
-router.get('/userProfile',jwtHelper.verifyJwtToken, ctrlUser.userProfile);
+router.get('/userProfile',jwtHelper.verifyJwtToken,ctrlUser.userProfile);
 
 router.post('/post', ctrlPost.savePost);
 
@@ -31,6 +31,7 @@ router.post('/deletePost', ctrlPost.deletePost );
 router.post('/addFriend', ctrlUser.addFriend);
 router.post('/deleteFriend', ctrlUser.deleteFriend);
 router.post('/getFriends', ctrlUser.getFriends);
+router.post('/wipeFriends', ctrlUser.wipeFriends);
 
 
 

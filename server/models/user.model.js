@@ -29,7 +29,7 @@ var userSchema = new mongoose.Schema({
         unique: true
     },
     bio: String,
-    friends: [{username:String}]
+    friends: [String]
     
 });
 

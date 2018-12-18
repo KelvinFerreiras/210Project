@@ -92,7 +92,6 @@ export class UserService {
 
   //Get user data from server.
   userProfile(): Observable<any>{
-    // console.log({ headers: { Authorization: `Bearer ${this.getToken()}` }})
     return this.http.get(environment.apiBaseUrl + '/userProfile', { headers: { Authorization: `Bearer ${this.getToken()}` }});
   }
 
@@ -104,12 +103,15 @@ export class UserService {
     return this.http.post(environment.apiBaseUrl+'/deleteFriend',payload);
   }
 
-  getFriends(payload: {username:String}) {
+  wipeFriends(payload: {username:String}){
+    return this.http.post( environment.apiBaseUrl+'/wipeFriends', payload);
+  }
+
+  getFriends(payload: {username:String}): Observable<any>{
     return this.http.post( environment.apiBaseUrl+'/getFriends', payload);
   }
 
   queryUsers(searchString:string, limit:number): Observable<any> {
-    // console.log({ headers: { searchString: searchString, limit: `${limit}` }})
     return this.http.get(environment.apiBaseUrl + '/queryUsers', { headers: { searchString: searchString, limit: `${limit}` }});
   }
 }

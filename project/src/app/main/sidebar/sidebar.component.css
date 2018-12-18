@@ -19,7 +19,7 @@ a {
     display: block;
 }
 
-li:hover {
+li:not(.exclude):hover {
     background-color: darkgray;
 }
 

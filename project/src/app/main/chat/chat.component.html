@@ -4,33 +4,39 @@
   <div class="col">
     <div class="card" id="search-card">
       <div class="card-header">Search Users</div>
-      <div class="card-body">
+      <div class="card-body" id="search-body">
         <!-- Search input field -->
         <div class="input-group mb-3">
-          <input #searchbox (keyup.enter)="onEnter(searchbox.value)" type="text" class="form-control" placeholder="Find username">
+          <input #searchbox (keyup.enter)="search(searchbox.value)" type="text" class="form-control" placeholder="Find username">
           <div class="input-group-append">
-            <button (click)="onEnter(searchbox.value)" class="input-group-text" id="search-append"> 
+            <button (click)="search(searchbox.value)" class="input-group-text btn btn-secondary" id="search-append"> 
                 <i class="material-icons">search</i>
             </button>
           </div>
         </div>
         <hr/>
-        <!-- Users appear here-->
-        <div *ngFor="let user of array2">
-          <div class="media border p-3" style="max-height: 60px; margin-top: 5px;">
-              <img src="../../../favicon.ico" alt="John Doe" class="align-self-center">
-              <div class="media-body align-self-center">
-                <p style="margin: auto;"> {{user}} </p>
+
+        <div class="user-boxes scrollbar-gray">
+          <!-- Users appear here-->
+          <div *ngFor="let user of array2">
+            <div class="media border p-3" style="max-height: 60px; margin-top: 5px;">
+                <i class="material-icons" style="color: rgb(148, 148, 207);">account_circle</i>
+                <!-- <img src="../../../favicon.ico" alt="John Doe" class="align-self-center"> -->
+                <div class="media-body align-self-center">
+                  <p class="user-details" style="margin: auto; margin-left: 10px;">
+                    <b>{{user.fullName}}</b><br>
+                    {{user.username}}
+                  </p>
+                </div>
+
+                <button (click)="addFriend(user.username)" class="btn btn-success" id="add-friend"> 
+                    <i class="material-icons">person_add</i>
+                </button>
               </div>
-            </div>
+          </div>
         </div>
 
-
       </div> 
-
-      <div class="card-footer">
-
-      </div>
     </div>
   </div>
 
@@ -38,7 +44,21 @@
   <div class="col">
     <div class="card" id="friend-card">
       <div class="card-header">Friends</div>
-      <div class="card-body">Content</div> 
+      <div class="card-body">
+          <div style="text-align: center;" data-toggle="buttons"> 
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-outline-info active">
+                    <input type="radio" name="options" id="btn-current" autocomplete="off" checked> Current
+                  </label>
+                  <label class="btn btn-outline-info">
+                    <input type="radio" name="options" id="btn-incoming" autocomplete="off"> Incoming
+                  </label>
+                  <label class="btn btn-outline-info" style="padding-left: 25px; padding-right: 25px;">
+                    <input type="radio" name="options" id="btn-sent" autocomplete="off"> Sent
+                  </label>
+              </div>
+          </div>
+      </div> 
     </div>
   </div>
 

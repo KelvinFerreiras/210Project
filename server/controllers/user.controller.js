@@ -3,6 +3,8 @@ const passport = require('passport');
 const _ = require('lodash');
 
 const User = mongoose.model('User');
+mongoose.set('useFindAndModify', false);
+
 
 module.exports.register = (req,res,next) => {
     var user = new User();
@@ -62,7 +64,7 @@ module.exports.userProfile = (req, res, next) => {
 
 //Queries all users whose name matches
 module.exports.queryUsers = (req, res) => {
-    User.find({ fullName: {"$regex": req.headers.searchstring, "$options": "i"} }, 'fullName _id',
+    User.find({ fullName: {"$regex": req.headers.searchstring, "$options": "i"} }, 'fullName _id username friends',
         (err, users) => {
             if(!users)
                 return res.status(404).json({ status: false, message: 'None exists' });
@@ -77,21 +79,18 @@ module.exports.queryUsers = (req, res) => {
 // request body: {"username":"...", "newfriend":" ..."}
 
 module.exports.addFriend = (req,res,next) => {
-
         User.findOneAndUpdate(
             { username: req.body.username }, 
-            { $push: { 
-                      friends: {
-                        "username" : req.body.newfriend
-                        }  
+            { $addToSet: { 
+                      friends: req.body.newfriend
                    } 
-            }, function (err, user) {
-
+            },
+            {new: true},
+            (err, user) => {
                 return res.json(true);
-              }
+            }
             
-            );
-
+        );
 }
 // delete a friend from a speficic user 
 // request body: {"username":"...", "friendTOBeDeleted":" ..."}
@@ -105,13 +104,25 @@ module.exports.deleteFriend = (req,res,next) => {
                     "username" : req.body.friendTOBeDeleted
                     }  
                } 
-        }, function (err, user) {
+        }, (err, user) => {
             return res.json(true);
           }
-        
         );
+}
 
-  
+// delete a friend from a speficic user 
+// request body: {"username":"...", "friendTOBeDeleted":" ..."}
+
+module.exports.wipeFriends = (req,res,next) => {
+    User.findOneAndUpdate(
+        { username: req.body.username }, 
+        { $set: {
+            friends: []
+        }
+        }, (err, user) => {
+            return res.json(true);
+          }
+    );
 }
 
 // return all friends from a speficic user 
@@ -121,7 +132,6 @@ module.exports.getFriends = (req,res) => {
 
     User.find({username: req.body.username}, {friends: 1 }, function (err, user) {
         if(!err) {
-
             res.send(user);
         }
         else{
@@ -129,19 +139,3 @@ module.exports.getFriends = (req,res) => {
         }
     });
 }
-
-module.exports.getFriends = (req,res) => {
-
-    User.find({username: req.body.username}, {friends: 1 }, function (err, user) {
-        if(!err) {
-
-            res.send(user);
-        }
-        else{
-            return next(err);
-        }
-    });
-}
-
-
-
