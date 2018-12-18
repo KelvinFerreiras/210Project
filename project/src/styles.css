@@ -1,17 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Poppins');
-@import "~bootstrap/dist/css/bootstrap.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+
 
 /* BASIC */
 
 html {
-  background-color: #56baed;
+  /* background-color: #56baed !important; */
 }
 
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
+  background-color: #56baed !important;
+
 }
 
 a {
@@ -401,3 +404,4 @@ td.text-center {
 td.text-right {
   text-align: right;
 }
+@import "~bootstrap/dist/css/bootstrap.css";
