@@ -92,26 +92,24 @@ export class UserService {
 
   //Get user data from server.
   userProfile(): Observable<any>{
+    // console.log({ headers: { Authorization: `Bearer ${this.getToken()}` }})
     return this.http.get(environment.apiBaseUrl + '/userProfile', { headers: { Authorization: `Bearer ${this.getToken()}` }});
   }
 
-  addFriend(payload: {username:String, newfriend:String}){
+  addFriend(payload: Object){ // payload should look like this {username: {username:String, newfriend:String}
     return this.http.post(environment.apiBaseUrl+'/addFriend',payload);
   }
 
-  deleteFriend(payload: {username:String, friendTOBeDeleted:String}){
+  deleteFriend(payload: {payload: Object}){ // payload should look like this {username: String, friendTOBeDeleted:String}
     return this.http.post(environment.apiBaseUrl+'/deleteFriend',payload);
   }
 
-  wipeFriends(payload: {username:String}){
-    return this.http.post( environment.apiBaseUrl+'/wipeFriends', payload);
-  }
-
-  getFriends(payload: {username:String}): Observable<any>{
+  getFriends(payload: Object  ) { // payload should look like this {username: String, friendTOBeDeleted:String}{username:String}
     return this.http.post( environment.apiBaseUrl+'/getFriends', payload);
   }
 
   queryUsers(searchString:string, limit:number): Observable<any> {
+    // console.log({ headers: { searchString: searchString, limit: `${limit}` }})
     return this.http.get(environment.apiBaseUrl + '/queryUsers', { headers: { searchString: searchString, limit: `${limit}` }});
   }
 }
