@@ -20,16 +20,5 @@ export class ProfileComponent implements OnInit {
     }, (err) => {
       console.error(err);
     });
-
-    //Async test
-    setTimeout( __ => {
-     // this.details.fullName = this.details.fullName + "_3";
-    }, 3000);
-
-    this.userService.queryUsers("b", 3).subscribe(result => {
-   //   console.log(result.users)
-    }, (err) => {
-    //  console.error(err);
-    });
   }
 }

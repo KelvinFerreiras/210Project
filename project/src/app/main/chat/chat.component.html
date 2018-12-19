@@ -48,16 +48,46 @@
           <div style="text-align: center;" data-toggle="buttons"> 
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                   <label class="btn btn-outline-info active">
-                    <input type="radio" name="options" id="btn-current" autocomplete="off" checked> Current
+                    <input type="radio" name="btn-radio-friend" id="btn-current" autocomplete="off" checked> Current
                   </label>
                   <label class="btn btn-outline-info">
-                    <input type="radio" name="options" id="btn-incoming" autocomplete="off"> Incoming
+                    <input type="radio" name="btn-radio-friend" id="btn-incoming" autocomplete="off"> Incoming
                   </label>
                   <label class="btn btn-outline-info" style="padding-left: 25px; padding-right: 25px;">
-                    <input type="radio" name="options" id="btn-sent" autocomplete="off"> Sent
+                    <input type="radio" name="btn-radio-friend" id="btn-sent" autocomplete="off"> Sent
                   </label>
               </div>
           </div>
+          <hr/>
+
+          <div class="user-boxes scrollbar-gray">
+              <!-- Users appear here-->
+            <div *ngFor="let user of array2">
+              <div class="media border p-3" style="max-height: 60px; margin-top: 5px;">
+                  <i class="material-icons" style="color: rgb(148, 148, 207);">account_circle</i>
+                  <!-- <img src="../../../favicon.ico" alt="John Doe" class="align-self-center"> -->
+                  <div class="media-body align-self-center">
+                    <p class="user-details" style="margin: auto; margin-left: 10px;">
+                      <b>{{user.fullName}}</b><br>
+                      {{user.username}}
+                    </p>
+                  </div>
+  
+                  <button (click)="addFriend(user.username)" class="btn btn-success" id="add-friend"> 
+                      <i class="material-icons">person_add</i>
+                  </button>
+                </div>
+            </div>
+          </div>
+
+          <button (click)="getFriends()" class="btn btn-success" id="add-friend"> 
+            <i class="material-icons">H</i>
+          </button>
+
+          <button (click)="wipeFriends()" class="btn btn-success" id="add-friend"> 
+            <i class="material-icons">W</i>
+          </button>
+
       </div> 
     </div>
   </div>

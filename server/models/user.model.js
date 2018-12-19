@@ -26,11 +26,11 @@ var userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: 'Username can\'t be empty',
-        unique: true
+        unique: true,
+        index: true
     },
     bio: String,
     friends: [String]
-    
 });
 
 

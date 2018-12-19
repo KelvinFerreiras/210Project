@@ -53,7 +53,7 @@ export class ChatComponent implements OnInit {
   }
 
   getFriends(){
-    this.userService.getFriends({username: this.userService.getUserDetails().username}).subscribe(result => {
+    this.userService.getFriends().subscribe(result => {
       console.log(result);
     }, (err) => {
       console.error(err);
@@ -61,7 +61,7 @@ export class ChatComponent implements OnInit {
   }
 
   wipeFriends(){
-    this.userService.wipeFriends({username: this.userService.getUserDetails().username}).subscribe(result => {
+    this.userService.wipeFriends().subscribe(result => {
       console.log(result);
     }, (err) => {
       console.error(err);

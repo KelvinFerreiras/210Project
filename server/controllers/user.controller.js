@@ -18,9 +18,6 @@ module.exports.register = (req,res,next) => {
     user.birthday = Date.now();
     user.bio= 'loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum';
 
-    
-
-
     user.bio = '';
     user.friends=[];
     user.created = Date.now();
@@ -107,7 +104,7 @@ module.exports.deleteFriend = (req,res,next) => {
         }, (err, user) => {
             return res.json(true);
           }
-        );
+    );
 }
 
 // delete a friend from a speficic user 
@@ -125,17 +122,32 @@ module.exports.wipeFriends = (req,res,next) => {
     );
 }
 
-// return all friends from a speficic user 
-// request body: {"username":"..."}
-
+//Get current friends and friend requests (to and from)
 module.exports.getFriends = (req,res) => {
+    collection = {current : [], incoming : [], send : []};
 
-    User.find({username: req.body.username}, {friends: 1 }, function (err, user) {
+    User.find({username: req.headers.username}, {friends: 1 }, function (err, user) {
         if(!err) {
-            res.send(user);
-        }
-        else{
-            return next(err);
-        }
+            User.find({username: user[0].friends, friends: req.headers.username}, "username", function (__, user2) {
+                //Note that total = current + send
+                for(current of user2){
+                    collection.current.push(current.username);
+                }
+                for(send of user[0].friends){
+                    if(!collection.current.includes(send)){
+                        collection.send.push(send);
+                    }
+                }
+                User.find({friends: req.headers.username}, "username", function (__, user3) {
+                    for(incoming of user3){
+                        if(!user[0].friends.includes(incoming.username)){
+                            collection.incoming.push(incoming.username);
+                        }
+                    }
+                    return res.status(200).json({ status: true, collection: collection});
+                });
+            });
+        }else{res.send("error")};
     });
 }
+

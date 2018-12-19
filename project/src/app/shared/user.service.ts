@@ -95,6 +95,16 @@ export class UserService {
     return this.http.get(environment.apiBaseUrl + '/userProfile', { headers: { Authorization: `Bearer ${this.getToken()}` }});
   }
 
+  queryUsers(searchString:string, limit:number): Observable<any> {
+    var header = { headers: { searchString: searchString, limit: `${limit}` }};
+    return this.http.get(environment.apiBaseUrl + '/queryUsers', header);
+  }
+
+  getFriends(): Observable<any>{
+    var header = { headers: { Authorization: `Bearer ${this.getToken()}`, username: this.getUserDetails().username}};
+    return this.http.get( environment.apiBaseUrl+'/getFriends', header);
+  }
+
   addFriend(payload: {username:String, newfriend:String}){
     return this.http.post(environment.apiBaseUrl+'/addFriend',payload);
   }
@@ -103,15 +113,7 @@ export class UserService {
     return this.http.post(environment.apiBaseUrl+'/deleteFriend',payload);
   }
 
-  wipeFriends(payload: {username:String}){
-    return this.http.post( environment.apiBaseUrl+'/wipeFriends', payload);
-  }
-
-  getFriends(payload: {username:String}): Observable<any>{
-    return this.http.post( environment.apiBaseUrl+'/getFriends', payload);
-  }
-
-  queryUsers(searchString:string, limit:number): Observable<any> {
-    return this.http.get(environment.apiBaseUrl + '/queryUsers', { headers: { searchString: searchString, limit: `${limit}` }});
+  wipeFriends(){
+    return this.http.post(environment.apiBaseUrl+'/wipeFriends', {username: this.getUserDetails().username});
   }
 }
