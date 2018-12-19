@@ -30,8 +30,8 @@ router.post('/deletePost', ctrlPost.deletePost );
 
 router.post('/addFriend', ctrlUser.addFriend);
 router.post('/deleteFriend', ctrlUser.deleteFriend);
-router.get('/getFriends', jwtHelper.verifyJwtToken, ctrlUser.getFriends);
-router.post('/wipeFriends', ctrlUser.wipeFriends);
+router.get('/getFriends', jwtHelper.verifyJwtToken, ctrlUser.getFriends, ctrlUser.test);
+router.put('/clearFriends', ctrlUser.clearFriends);
 
 
 

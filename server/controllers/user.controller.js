@@ -110,7 +110,7 @@ module.exports.deleteFriend = (req,res,next) => {
 // delete a friend from a speficic user 
 // request body: {"username":"...", "friendTOBeDeleted":" ..."}
 
-module.exports.wipeFriends = (req,res,next) => {
+module.exports.clearFriends = (req,res,next) => {
     User.findOneAndUpdate(
         { username: req.body.username }, 
         { $set: {
@@ -123,19 +123,19 @@ module.exports.wipeFriends = (req,res,next) => {
 }
 
 //Get current friends and friend requests (to and from)
-module.exports.getFriends = (req,res) => {
-    collection = {current : [], incoming : [], send : []};
+module.exports.getFriends = (req,res, next) => {
+    collection = {current : [], incoming : [], sent : []};
 
-    User.find({username: req.headers.username}, {friends: 1 }, function (err, user) {
+    User.find({username: req.headers.username}, "friends", function (err, user) {
         if(!err) {
             User.find({username: user[0].friends, friends: req.headers.username}, "username", function (__, user2) {
-                //Note that total = current + send
+                //Total = current + sent
                 for(current of user2){
                     collection.current.push(current.username);
                 }
-                for(send of user[0].friends){
-                    if(!collection.current.includes(send)){
-                        collection.send.push(send);
+                for(sent of user[0].friends){
+                    if(!collection.current.includes(sent)){
+                        collection.sent.push(sent);
                     }
                 }
                 User.find({friends: req.headers.username}, "username", function (__, user3) {
@@ -144,10 +144,33 @@ module.exports.getFriends = (req,res) => {
                             collection.incoming.push(incoming.username);
                         }
                     }
-                    return res.status(200).json({ status: true, collection: collection});
+
+                    req.headers.collection = collection;
+                    next();
                 });
             });
-        }else{res.send("error")};
+        }else{return res.err("error")};
     });
 }
 
+//Expects a list of usernames and returns the details associated with those usernames
+module.exports.test = (req,res) => {
+    collection = {current : [], incoming : [], sent : []};
+
+    User.find({username: req.headers.collection.current}, 'fullName username',
+        (err, users) => {
+            collection.current = users;
+            User.find({username: req.headers.collection.incoming}, 'fullName username',
+                (err, users2) => {
+                    collection.incoming = users2;
+                    User.find({username: req.headers.collection.sent}, 'fullName username',
+                        (err, users3) => {
+                            collection.sent = users3;
+                            return res.json(collection);
+                        }
+                    );
+                }
+            );
+        }
+    );
+}

@@ -92,8 +92,8 @@ export class UserService {
 
   //Get user data from server.
   userProfile(): Observable<any>{
-    // console.log({ headers: { Authorization: `Bearer ${this.getToken()}` }})
-    return this.http.get(environment.apiBaseUrl + '/userProfile', { headers: { Authorization: `Bearer ${this.getToken()}` }});
+    var header = { headers: { Authorization: `Bearer ${this.getToken()}` } }
+    return this.http.get(environment.apiBaseUrl + '/userProfile', header);
   }
 
   queryUsers(searchString:string, limit:number): Observable<any> {
@@ -101,6 +101,7 @@ export class UserService {
     return this.http.get(environment.apiBaseUrl + '/queryUsers', header);
   }
 
+  //Get current, incoming requests and sent requests for this user
   getFriends(): Observable<any>{
     var header = { headers: { Authorization: `Bearer ${this.getToken()}`, username: this.getUserDetails().username}};
     return this.http.get( environment.apiBaseUrl+'/getFriends', header);
@@ -114,7 +115,7 @@ export class UserService {
     return this.http.post(environment.apiBaseUrl+'/deleteFriend',payload);
   }
 
-  wipeFriends(){
-    return this.http.post(environment.apiBaseUrl+'/wipeFriends', {username: this.getUserDetails().username});
+  clearFriends(){
+    return this.http.put(environment.apiBaseUrl+'/clearFriends', {username: this.getUserDetails().username});
   }
 }

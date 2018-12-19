@@ -99,7 +99,28 @@ Buttons
 }
 
 #add-friend{
-    height: 30px;
-    width: 30px;
+    height: 26px;
+    width: 26px;
     padding: 0px;
+}
+
+#delete-friend{
+    background-color: red;
+    height: 26px;
+    width: 26px;
+    padding: 0px;
+}
+
+.btn-active{
+    background-color: rgb(54, 192, 216);
+    color: white;
+}
+
+.rbn:hover{
+    background-color: rgb(54, 192, 216);
+    color: white;
+}
+
+.btn2{
+    color:white;
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/user.service';
+import { Observable } from 'rxjs';
 
 var i = 0
 var mike = [];
@@ -14,34 +15,43 @@ for (var i = 0; i < 100; i++) {
 })
 export class ChatComponent implements OnInit {
   array = mike;
-  array2 = []; //Let's save this to local storage
+  userQuery = []; 
+  friendArray = {current: [], incoming: [], sent: []};
+  friendList = [];
+  tabSetting = "";
 
   constructor(private userService: UserService) { 
   }
 
   ngOnInit(){
+    this.tabSetting = "current";
+
+    this.userService.getFriends().subscribe(result => {
+      this.friendArray = {current: [], incoming: [], sent: []};
+      this.friendArray.current = result.current;
+      this.friendArray.incoming = result.incoming;
+      this.friendArray.sent = result.sent;
+      this.friendList = this.friendArray.current;
+      console.log(this.friendArray);
+    }, (err) => {
+      console.error(err);
+    });
   }
   
   search(value: string){ 
-    this.array2 = [];
- 
     if(value != ""){
       this.userService.queryUsers(value, 100).subscribe(result => {
-        console.log(result.users);
+        this.userQuery = [];
         for (var i of result.users) {
           if(i.username != this.userService.getUserDetails().username){
             var person = {fullName: i.fullName, username: i.username};
-            this.array2.push(person);
+            this.userQuery.push(person);
           }
         }
       }, (err) => {
         console.error(err);
       });
     }
-  }
-
-  test(){
-    this.array2.push(3);
   }
 
   addFriend(friend: string){ 
@@ -52,21 +62,35 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  getFriends(){
-    this.userService.getFriends().subscribe(result => {
+  clearFriends(){
+    this.userService.clearFriends().subscribe(result => {
       console.log(result);
     }, (err) => {
       console.error(err);
     });
   }
 
-  wipeFriends(){
-    this.userService.wipeFriends().subscribe(result => {
-      console.log(result);
-    }, (err) => {
-      console.error(err);
-    });
+  tabSelector(choice: string){
+    this.tabSetting = choice;
+    if(choice == "current"){
+      this.friendList = this.friendArray.current;
+    }else if(choice == "incoming"){
+      this.friendList = this.friendArray.incoming;
+    }else{
+      this.friendList = this.friendArray.sent;
+    }
   }
+
+  // getFriends(){
+  //   this.userService.getFriends().subscribe(result => {
+  //     this.friendArray = {current: [], incoming: [], sent: []};
+  //     this.friendArray.current = result.collection.current;
+  //     this.friendArray.incoming = result.collection.incoming;
+  //     this.friendArray.sent = result.collection.sent;
+  //   }, (err) => {
+  //     console.error(err);
+  //   });
+  // }
 }
 
 
