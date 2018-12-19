@@ -98,17 +98,25 @@ Buttons
     box-shadow: none;
 }
 
+.btn2{
+    height: 26px;
+    width: 26px;
+    padding: 0px;
+    color:white;
+}
+
 #add-friend{
     height: 26px;
     width: 26px;
     padding: 0px;
 }
 
-#delete-friend{
-    background-color: red;
-    height: 26px;
-    width: 26px;
-    padding: 0px;
+#delete{
+    background-color: rgb(253, 80, 80);
+}
+
+#approve{
+    background-color: rgb(69, 185, 69);
 }
 
 .btn-active{
@@ -121,6 +129,5 @@ Buttons
     color: white;
 }
 
-.btn2{
-    color:white;
-}
+
+
