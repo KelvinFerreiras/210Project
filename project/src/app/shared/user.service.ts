@@ -92,6 +92,7 @@ export class UserService {
 
   //Get user data from server.
   userProfile(): Observable<any>{
+    // console.log({ headers: { Authorization: `Bearer ${this.getToken()}` }})
     return this.http.get(environment.apiBaseUrl + '/userProfile', { headers: { Authorization: `Bearer ${this.getToken()}` }});
   }
 
