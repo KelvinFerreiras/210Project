@@ -26,7 +26,7 @@ export class ChatComponent implements OnInit {
   ngOnInit(){
     this.tabSetting = "current";
 
-    this.getFriends(__ =>{
+    this.updateFriends(__ =>{
       this.friendList = this.friendArray.current;
     });
   }
@@ -49,6 +49,7 @@ export class ChatComponent implements OnInit {
 
   addFriend(friend: string){ 
     this.userService.addFriend({username: this.userService.getUserDetails().username, newfriend: friend}).subscribe(result => {
+      this.updateFriends('');
       console.log(result);
     }, (err) => {
       console.error(err);
@@ -74,13 +75,15 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  getFriends(callback){
+  updateFriends(callback){
     this.userService.getFriends().subscribe(result => {
       this.friendArray = {current: [], incoming: [], sent: []};
       this.friendArray.current = result.current;
       this.friendArray.incoming = result.incoming;
       this.friendArray.sent = result.sent;
-      callback();
+      if(callback && {}.toString.call(callback) === '[object Function]'){
+        callback();
+      };
     }, (err) => {
       console.error(err);
     });

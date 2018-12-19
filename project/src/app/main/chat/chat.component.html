@@ -74,19 +74,19 @@
                     </p>
                   </div>
   
-                  <button *ngIf="tabSetting=='current'" (click)="deleteFriend(user.username)" class="btn btn2" id="delete"> 
+                  <button *ngIf="tabSetting=='current'" (click)="deleteFriend(friend.username)" class="btn btn2" id="delete"> 
                       <i class="material-icons">clear</i>
                   </button>
 
-                  <button *ngIf="tabSetting=='incoming'" (click)="deleteFriend(user.username)" style="margin-right: 5px;" class="btn btn2" id="delete"> 
+                  <button *ngIf="tabSetting=='incoming'" (click)="deleteFriend(friend.username)" style="margin-right: 5px;" class="btn btn2" id="delete"> 
                       <i class="material-icons">clear</i>
                   </button>
 
-                  <button *ngIf="tabSetting=='incoming'" (click)="deleteFriend(user.username)" class="btn btn2" id="approve"> 
+                  <button *ngIf="tabSetting=='incoming'" (click)="addFriend(friend.username)" class="btn btn2" id="approve"> 
                       <i class="material-icons">check</i>
                   </button>
 
-                  <button *ngIf="tabSetting=='sent'" (click)="deleteFriend(user.username)" class="btn btn2" id="delete"> 
+                  <button *ngIf="tabSetting=='sent'" (click)="deleteFriend(friend.username)" class="btn btn2" id="delete"> 
                       <i class="material-icons">clear</i>
                   </button>
                 </div>
