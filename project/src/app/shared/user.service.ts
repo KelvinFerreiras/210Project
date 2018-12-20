@@ -12,7 +12,7 @@ export interface UserDetails {
   fullName: string;
   username: string;
   exp: number;
-}
+} 
 
 @Injectable({
   providedIn: 'root'
