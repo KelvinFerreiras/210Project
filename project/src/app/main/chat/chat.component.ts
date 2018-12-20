@@ -16,7 +16,7 @@ export class ChatComponent implements OnInit {
   friendList = [];
   tabSetting = "";
   messages = [];
-  socket = io(`http://localhost:3001?`);
+  socket = io(`http://localhost:3001/?name=${this.userService.getUserDetails().fullName}`);
 
   constructor(private userService: UserService) { }
 

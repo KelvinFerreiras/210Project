@@ -38,14 +38,13 @@ const io = socketIO(serveSocket);
 // io.emit('some event', { for: 'everyone' });
 
 io.on('connection', (socket) => {
-    // io.emit('response', {username: socket.handshake.query.name, message: " has joined the channel."});
+    // io.emit('response', {fullName: socket.handshake.query.name, message: " has joined the channel."});
     socket.on('message', (message) =>{
         io.emit('response', message);
     });
     
-    socket.on('disconnect', () => {
-        console.log('User disconnected'); 
-    });
+    // socket.on('disconnect', () => {
+    // });
 })
 
 serveSocket.listen(3001, __ =>{
