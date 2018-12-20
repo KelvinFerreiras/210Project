@@ -118,7 +118,8 @@ export class ChatComponent implements OnInit {
     let body = {fullName: this.userService.getUserDetails().fullName, message: value};
     this.socket.emit('message', body);
   }
-  
+
+ 
 }
 
 

@@ -18,7 +18,6 @@ export class PostsService {
     fullName: '',
     text: '',
     date: 0
-    //, image: null
    };
 
   constructor(private http: HttpClient) { }

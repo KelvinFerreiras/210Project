@@ -16,7 +16,7 @@ var userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: 'Password name can\'t be empty',
-        minlength : [4,'Password must be atleast 4 character long']
+        minlength : [4,'Password must be at least 4 character long']
     },
     saltSecret: String,
     birthday: {
@@ -30,7 +30,7 @@ var userSchema = new mongoose.Schema({
         index: true
     },
     bio: String,
-    friends: [String]
+    friends: [Object]
 });
 
 

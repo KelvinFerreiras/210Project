@@ -3,5 +3,4 @@ export class Post {
     fullName: string;
     text: string;
     date: number;
-   // image: File;
 }
