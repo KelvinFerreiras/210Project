@@ -5,6 +5,6 @@ var postSchema = new mongoose.Schema({
     fullName: String,
     text: String,
     date: Number
-    //, image: String
 });
+
 mongoose.model('posts', postSchema);
