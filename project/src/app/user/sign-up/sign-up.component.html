@@ -8,7 +8,7 @@
     <label class="validation-message">This field is required.</label>
   </div>
 
-  <input type="text" #fullName="ngModel" [(ngModel)]="userService.selectedUser.username" name="username" placeholder="Username"
+  <input type="text" #username="ngModel" [(ngModel)]="userService.selectedUser.username" name="username" placeholder="Username"
   required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !username.valid }">
   <div *ngIf="signUpForm.submitted && !username.valid">
     <label class="validation-message">This field is required.</label>
