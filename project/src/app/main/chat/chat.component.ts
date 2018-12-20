@@ -30,7 +30,7 @@ export class ChatComponent implements OnInit {
   
   search(value: string){ 
     if(value != ""){
-      this.userService.queryUsers(value, 100).subscribe(result => {
+      this.userService.queryUsers(value, 10).subscribe(result => {
         this.userQuery = [];
         for (var i of result.users) {
           if(i.username != this.userService.getUserDetails().username){
@@ -85,16 +85,17 @@ export class ChatComponent implements OnInit {
 
   updateFriends(){
     this.userService.getFriends().subscribe(result => {
-      this.friendArray = result.collection;
-      this.friendArrayLite = result.lite;
-      this.updateFriendList(this.tabSetting);
+      if(!(result.collection === undefined || result.lite === undefined)){
+        this.friendArray = result.collection;
+        this.friendArrayLite = result.lite;
+        this.updateFriendList(this.tabSetting);
+      }
     }, (err) => {
       console.error(err);
     });
   }
 
   friendStatusOf(username: string): string{
-    console.log(this.friendArrayLite);
     if(this.friendArrayLite.current.includes(username)){
       return "current";
     }else if(this.friendArrayLite.incoming.includes(username)){
