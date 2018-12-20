@@ -44,7 +44,6 @@ io.on('connection', (socket) => {
     });
     
     socket.on('disconnect', () => {
-        io.emit('response', {username: socket.handshake.query.name, message: " has left the channel."});
         console.log('User disconnected'); 
     });
 })

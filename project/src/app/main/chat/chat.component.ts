@@ -24,8 +24,14 @@ export class ChatComponent implements OnInit {
     this.tabSetting = "current";
     setInterval(__ => {this.updateFriends()}, 1000);
 
+    //Chatroom 
+    if(JSON.parse(sessionStorage.getItem('logs')) != null){
+      this.messages = JSON.parse(sessionStorage.getItem('logs'));
+    }
+
     this.socket.on('response', (response) =>{
       this.messages.push(response);
+      sessionStorage.setItem('logs', JSON.stringify(this.messages));
     });
   }
   
