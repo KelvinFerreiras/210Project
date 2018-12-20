@@ -14,7 +14,8 @@ module.exports.register = (req,res,next) => {
 
     // user.username = req.body.password;
     // user.birthday = req.body.password;
-    user.username = 'userTest'+Date.now();
+    // user.username = 'userTest'+Date.now();
+    user.username = req.body.username;
     user.birthday = Date.now();
     user.bio= 'loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum loremIpsum';
 
