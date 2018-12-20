@@ -17,18 +17,15 @@ export class ChatComponent implements OnInit {
   array = mike;
   userQuery = []; 
   friendArray = {current: [], incoming: [], sent: []};
+  friendArrayLite = {current: [], incoming: [], sent: []};
   friendList = [];
   tabSetting = "";
 
-  constructor(private userService: UserService) { 
-  }
+  constructor(private userService: UserService) { }
 
   ngOnInit(){
     this.tabSetting = "current";
-
-    this.updateFriends(__ =>{
-      this.friendList = this.friendArray.current;
-    });
+    setInterval(__ => {this.updateFriends()}, 1000);
   }
   
   search(value: string){ 
@@ -49,8 +46,15 @@ export class ChatComponent implements OnInit {
 
   addFriend(friend: string){ 
     this.userService.addFriend({username: this.userService.getUserDetails().username, newfriend: friend}).subscribe(result => {
-      this.updateFriends('');
-      console.log(result);
+      this.updateFriends();
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  deleteFriend(toDelete: string){
+    this.userService.deleteFriend({username: this.userService.getUserDetails().username, friendTOBeDeleted: toDelete}).subscribe(result => {
+      this.updateFriends();
     }, (err) => {
       console.error(err);
     });
@@ -66,27 +70,40 @@ export class ChatComponent implements OnInit {
 
   tabSelector(choice: string){
     this.tabSetting = choice;
-    if(choice == "current"){
+    this.updateFriendList(choice);
+  }
+
+  updateFriendList(setting: string){
+    if(setting == "current"){
       this.friendList = this.friendArray.current;
-    }else if(choice == "incoming"){
+    }else if(setting == "incoming"){
       this.friendList = this.friendArray.incoming;
     }else{
       this.friendList = this.friendArray.sent;
     }
   }
 
-  updateFriends(callback){
+  updateFriends(){
     this.userService.getFriends().subscribe(result => {
-      this.friendArray = {current: [], incoming: [], sent: []};
-      this.friendArray.current = result.current;
-      this.friendArray.incoming = result.incoming;
-      this.friendArray.sent = result.sent;
-      if(callback && {}.toString.call(callback) === '[object Function]'){
-        callback();
-      };
+      this.friendArray = result.collection;
+      this.friendArrayLite = result.lite;
+      this.updateFriendList(this.tabSetting);
     }, (err) => {
       console.error(err);
     });
+  }
+
+  friendStatusOf(username: string): string{
+    console.log(this.friendArrayLite);
+    if(this.friendArrayLite.current.includes(username)){
+      return "current";
+    }else if(this.friendArrayLite.incoming.includes(username)){
+      return "incoming";
+    }else if(this.friendArrayLite.sent.includes(username)){
+      return "sent";
+    }else{
+      return "none";
+    }
   }
 }
 

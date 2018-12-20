@@ -93,17 +93,30 @@ module.exports.addFriend = (req,res,next) => {
 // request body: {"username":"...", "friendTOBeDeleted":" ..."}
 
 module.exports.deleteFriend = (req,res,next) => {
-
     User.findOneAndUpdate(
         { username: req.body.username }, 
         { $pull: { 
-                  friends: {
-                    "username" : req.body.friendTOBeDeleted
-                    }  
+                  friends: req.body.friendTOBeDeleted
                } 
         }, (err, user) => {
-            return res.json(true);
-          }
+            if(err){
+                return res.status(404).json({ status: false, message: 'User record not found' });
+            }else{
+                User.findOneAndUpdate(
+                { username: req.body.friendTOBeDeleted }, 
+                { $pull: { 
+                          friends: req.body.username
+                       } 
+                }, (err2, user2) => {
+                    if(err2){
+                        return res.status(404).json({ status: false, message: 'User record not found' });
+                    }else{
+                        return res.status(200).json({ status: true, message: 'Successfully deleted friends' });;
+                    }
+                }
+                );
+            }  
+        }
     );
 }
 
@@ -166,7 +179,7 @@ module.exports.test = (req,res) => {
                     User.find({username: req.headers.collection.sent}, 'fullName username',
                         (err, users3) => {
                             collection.sent = users3;
-                            return res.json(collection);
+                            return res.json({lite: req.headers.collection, collection: collection});
                         }
                     );
                 }

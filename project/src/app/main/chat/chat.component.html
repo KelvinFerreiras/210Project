@@ -29,8 +29,24 @@
                   </p>
                 </div>
 
-                <button (click)="addFriend(user.username)" class="btn btn-success" id="add-friend"> 
+                <button *ngIf="friendStatusOf(user.username)=='none'" (click)="addFriend(user.username)" class="btn btn-success" id="add-friend"> 
                     <i class="material-icons">person_add</i>
+                </button>
+
+                <button *ngIf="friendStatusOf(user.username)=='current'" (click)="deleteFriend(user.username)" class="btn btn2" id="delete"> 
+                    <i class="material-icons">clear</i>
+                </button>
+
+                <button *ngIf="friendStatusOf(user.username)=='incoming'" (click)="deleteFriend(user.username)" style="margin-right: 5px;" class="btn btn2" id="delete"> 
+                    <i class="material-icons">clear</i>
+                </button>
+
+                <button *ngIf="friendStatusOf(user.username)=='incoming'" (click)="addFriend(user.username)" class="btn btn2" id="approve"> 
+                    <i class="material-icons">check</i>
+                </button>
+
+                <button *ngIf="friendStatusOf(user.username)=='sent'" (click)="deleteFriend(user.username)" class="btn btn2" id="delete"> 
+                    <i class="material-icons">clear</i>
                 </button>
               </div>
           </div>
@@ -59,7 +75,7 @@
             </div>
           </div>
           <hr/>
-          
+      
           <!-- Current friends appear here-->
           <div class="user-boxes scrollbar-gray">
               <!-- Users appear here-->
