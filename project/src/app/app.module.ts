@@ -20,7 +20,8 @@ import { GamesComponent } from './main/games/games.component';
 import { SettingsComponent } from './main/settings/settings.component';
 import { MakepostComponent } from './main/feed/posts/makepost/makepost.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
-import { PongGameComponent } from './main/games/pong/pong.component'
+import { PongGameComponent } from './main/games/pong/pong.component';
+import { SnakeGameComponent } from './main/games/snake/snakegame.component'
 
 import { UserService } from './shared/user.service';
 import { AuthGuard } from "./auth/auth.guard";
@@ -47,7 +48,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     SettingsComponent,
     MakepostComponent,
     SignInComponent,
-    PongGameComponent
+    PongGameComponent,
+    SnakeGameComponent
     ],
   imports: [
     BrowserModule,

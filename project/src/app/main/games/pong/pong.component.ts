@@ -45,7 +45,7 @@ export class PongGameComponent implements OnInit {
     }
 
     // Draw background
-    this.context.fillStyle = 'rgb(0,0,0)';
+    this.context.fillStyle = 'rgb(0,255,0)';
     this.context.fillRect(0, 0, this.width, this.height);
 
     // Set to white for game objects
