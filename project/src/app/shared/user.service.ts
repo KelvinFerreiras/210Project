@@ -20,6 +20,7 @@ export interface UserDetails {
 export class UserService {
   selectedUser: User = {
     fullName: '',
+    username: '',
     email: '',
     password: ''
   };
