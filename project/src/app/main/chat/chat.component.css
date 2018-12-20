@@ -129,5 +129,11 @@ Buttons
     color: white;
 }
 
+/*Message area*/
+textarea {
+    resize: none;
+}
+
+
 
 

@@ -124,16 +124,16 @@
         
         <div class="card-body scrollbar-gray" id="message-body">
             <div class="message-history">
-                <div *ngFor="let s of array">
-                  Hellossssssssssssssssssssssssssssssssssssssss {{s}} <br>
+                <div *ngFor="let message of messages">
+                    {{message.fullName}}: {{message.message}}<br>
                 </div>
             </div>
         </div> 
         <div class="card-footer">
             <div class="message-input">
                 <form>
-                  <div class="input-group">
-                    <textarea id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info"></textarea>
+                  <div class="input-group">             
+                      <textarea #msgfield (keyup.enter)="sendMsg(msgfield.value); msgfield.value =''" id="msg" rows="2" class="form-control" placeholder="Enter Message"></textarea>
                   </div>
                 </form>
             </div>

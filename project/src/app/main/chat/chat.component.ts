@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/user.service';
 import { Observable } from 'rxjs';
+import * as io from 'socket.io-client';
 
-var i = 0
-var mike = [];
-for (var i = 0; i < 100; i++) { 
-    mike.push(i);
-}
 
 @Component({
   selector: 'app-chat',
@@ -14,18 +10,23 @@ for (var i = 0; i < 100; i++) {
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  array = mike;
   userQuery = []; 
   friendArray = {current: [], incoming: [], sent: []};
   friendArrayLite = {current: [], incoming: [], sent: []};
   friendList = [];
   tabSetting = "";
+  messages = [];
+  socket = io(`http://localhost:3001?`);
 
   constructor(private userService: UserService) { }
 
   ngOnInit(){
     this.tabSetting = "current";
     setInterval(__ => {this.updateFriends()}, 1000);
+
+    this.socket.on('response', (response) =>{
+      this.messages.push(response);
+    });
   }
   
   search(value: string){ 
@@ -106,6 +107,12 @@ export class ChatComponent implements OnInit {
       return "none";
     }
   }
+
+  sendMsg(value){
+    let body = {fullName: this.userService.getUserDetails().fullName, message: value};
+    this.socket.emit('message', body);
+  }
+  
 }
 
 
