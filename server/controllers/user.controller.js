@@ -141,28 +141,32 @@ module.exports.getFriends = (req,res, next) => {
 
     User.find({username: req.headers.username}, "friends", function (err, user) {
         if(!err) {
-            User.find({username: user[0].friends, friends: req.headers.username}, "username", function (__, user2) {
+            User.find({username: user[0].friends, friends: req.headers.username}, "username", function (err2, user2) {
                 //Total = current + sent
-                for(current of user2){
-                    collection.current.push(current.username);
-                }
-                for(sent of user[0].friends){
-                    if(!collection.current.includes(sent)){
-                        collection.sent.push(sent);
+                if(!err2){
+                    for(current of user2){
+                        collection.current.push(current.username);
                     }
-                }
-                User.find({friends: req.headers.username}, "username", function (__, user3) {
-                    for(incoming of user3){
-                        if(!user[0].friends.includes(incoming.username)){
-                            collection.incoming.push(incoming.username);
+                    for(sent of user[0].friends){
+                        if(!collection.current.includes(sent)){
+                            collection.sent.push(sent);
                         }
                     }
+                    User.find({friends: req.headers.username}, "username", function (err3, user3) {
+                        if(!err3){
+                            for(incoming of user3){
+                                if(!user[0].friends.includes(incoming.username)){
+                                    collection.incoming.push(incoming.username);
+                                }
+                            }
 
-                    req.headers.collection = collection;
-                    next();
-                });
+                            req.headers.collection = collection;
+                            next();
+                        }else{return res.status(500).json({ status: false, message: 'unexpected error' })};  
+                    });
+                }else{return res.status(500).json({ status: false, message: 'unexpected error' })};
             });
-        }else{return res.err("error")};
+        }else{return res.status(500).json({ status: false, message: 'unexpected error' })};
     });
 }
 
@@ -172,18 +176,24 @@ module.exports.test = (req,res) => {
 
     User.find({username: req.headers.collection.current}, 'fullName username',
         (err, users) => {
-            collection.current = users;
-            User.find({username: req.headers.collection.incoming}, 'fullName username',
-                (err, users2) => {
-                    collection.incoming = users2;
-                    User.find({username: req.headers.collection.sent}, 'fullName username',
-                        (err, users3) => {
-                            collection.sent = users3;
-                            return res.json({lite: req.headers.collection, collection: collection});
-                        }
-                    );
-                }
-            );
+            if(!err){
+                collection.current = users;
+                User.find({username: req.headers.collection.incoming}, 'fullName username',
+                    (err2, users2) => {
+                        if(!err2){
+                            collection.incoming = users2;
+                            User.find({username: req.headers.collection.sent}, 'fullName username',
+                                (err3, users3) => {
+                                    if(!err3){
+                                        collection.sent = users3;
+                                        return res.json({lite: req.headers.collection, collection: collection});
+                                    }else{return res.status(500).json({ status: false, message: 'unexpected error' })};
+                                }
+                            );
+                        }else{return res.status(500).json({ status: false, message: 'unexpected error' })};
+                    }
+                );
+            }else{return res.status(500).json({ status: false, message: 'unexpected error' })};
         }
     );
 }
