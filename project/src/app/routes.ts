@@ -6,8 +6,6 @@ import { MainComponent } from './main/main.component';
 import { FeedComponent } from './main/feed/feed.component';
 import { ChatComponent } from './main/chat/chat.component';
 import { ProfileComponent } from './main/profile/profile.component';
-import { GamesComponent } from './main/games/games.component';
-import { SettingsComponent } from './main/settings/settings.component';
 
 import { AuthGuard } from "./auth/auth.guard";
 
@@ -26,9 +24,7 @@ export const appRoutes: Routes = [
         children: [
             { path: 'profile', component: ProfileComponent },
             { path: 'feed', component: FeedComponent},
-            { path: 'chat', component: ChatComponent },
-            { path: 'games', component: GamesComponent },
-            { path: 'settings', component: SettingsComponent }
+            { path: 'chat', component: ChatComponent }
         ]
 
     },
