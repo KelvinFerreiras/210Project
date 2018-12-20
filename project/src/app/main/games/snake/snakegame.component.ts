@@ -83,7 +83,7 @@ export class SnakeGameComponent implements OnInit {
   keyDown(event: KeyboardEvent) {
     if (event.keyCode == Controls.Up) {
         this.player.move("up");
-       this.socket.emit('update',"up",this.player);
+       this.socket.emit('update',this.player);
     }
     if (event.keyCode == Controls.Down) {
         this.player.move("down");
@@ -91,11 +91,11 @@ export class SnakeGameComponent implements OnInit {
     }
     if (event.keyCode == Controls.Left) {
         this.player.move("left");
-      this.socket.emit('update',"left",this.player);
+      this.socket.emit('update',this.player);
     }
     if (event.keyCode == Controls.Right) {
         this.player.move("right");
-      this.socket.emit('update',"right",this.player);
+      this.socket.emit('update',this.player);
     }
 
   }
